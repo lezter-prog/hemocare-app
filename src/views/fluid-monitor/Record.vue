@@ -55,7 +55,6 @@
                 Sample
               </ion-col>
             </ion-row>
-           
         </ion-grid>
         <!-- <ExploreContainer name="Tab 1 page" /> -->
       </ion-content>

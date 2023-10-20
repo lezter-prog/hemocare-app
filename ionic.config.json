@@ -1,0 +1,7 @@
+{
+  "name": "hemocare-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}

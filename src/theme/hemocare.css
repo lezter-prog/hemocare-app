@@ -1,0 +1,7 @@
+@font-face {
+    font-family: tt-lake-bold;
+    src: url(/public/fonts/TT-Lakes-Compressed-Bold/TT-Lakes-Compressed-Bold.ttf);
+}
+.body {
+    font-family: tt-lake-bold !important;
+}

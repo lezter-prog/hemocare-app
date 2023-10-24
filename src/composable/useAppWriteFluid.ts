@@ -116,9 +116,57 @@ export const useAppwiteFluid = ()=>{
         }
     }
 
+    const getLast7Days = async ()=>{
+       
+        try {
+            var result = {
+                "dates":new Array(),
+                "value":new Array()
+            };
+            for(var i=6; i>0; i--) {
+                await randomWait();
+                console.log( "sample"+i);
+                var d = new Date();
+                d.setDate(d.getDate() - i);
+                var momentDate =  moment(d).format('MMM-DD-YYY');
+                result.dates.push(momentDate)
+                const header= await getValueByDate(d);
+                result.value.push(header.data?.documents[0]?.total_fluid_taken_ml);
+            }
+            console.log(result);
+            return {data:result, error:undefined};
+            
+        } catch (error) {
+            return {error, data:undefined}
+        }
+    }
+
+     const getValueByDate = async (date:Date)=>{
+        try {
+           
+            const header = await database.value?.listDocuments(
+                CONFIG.DATABASE_ID,
+                monitorFluidHeaderCollection.value,
+                [
+                     query.equal('date_entry',moment(date).format('MM-DD-YYYY'))
+                ]
+            ); 
+            return {data:header, error:undefined};
+        } catch (error) {
+            return {error, data:undefined}
+        }
+    }
+
     return {
         inputFluid,
         reduceFluid,
-        checkTodaysEntry
+        checkTodaysEntry,
+        getLast7Days,
+        getValueByDate
     }
+}
+
+async function randomWait() {
+    await new Promise((resolve) => setTimeout(resolve, Math.floor(Math.random() * 100)));
+    return;
 }

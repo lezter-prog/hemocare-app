@@ -50,6 +50,29 @@
                 </ion-row>
               </ion-grid>
           </ion-item-group>
+
+          <ion-item-group>
+            <ion-item-divider>
+              <ion-label> Login Information </ion-label>
+            </ion-item-divider>
+            <ion-item>
+                <ion-input ref="userNameRef" type="text" labelPlacement="floating" label="Username" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input ref="passwordRef" type="password" labelPlacement="floating" label="Password" required></ion-input>
+              </ion-item>
+            <ion-item>
+                <ion-input ref="retypePassordRef" type="number" labelPlacement="floating" label="Re-enter Password" required></ion-input>
+            </ion-item>
+            
+              <ion-grid>
+                <ion-row>
+                  <ion-col class="ion-justify-content-center">
+                    <ion-button type="submit" color="primary"  expand="block" >Register</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+          </ion-item-group>
         </ion-list>
       </form>
     </ion-content>

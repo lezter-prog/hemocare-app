@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "841529009014",
+    "project_id": "hemocare-1ea1f",
+    "storage_bucket": "hemocare-1ea1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841529009014:android:5140f06f52dec0bab19057",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbteHk6odHFdL7wpt2eccq1qeR01GNkcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

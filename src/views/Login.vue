@@ -23,30 +23,12 @@
                 <ion-input ref="emailRef" type="text" labelPlacement="floating" label="Email" required></ion-input>
             </ion-item>
             <ion-item>
-                <ion-input ref="passwordRef" type="text" labelPlacement="floating" label="Password" required></ion-input>
+                <ion-input ref="passwordRef" type="password" labelPlacement="floating" label="Password" required></ion-input>
               </ion-item>
             <ion-item>
               <ion-button type="submit" color="primary"  expand="block" >Login</ion-button>         
-              <ion-button type="button" color="secondary"  expand="block" >Register</ion-button>     
+              <ion-button @click="registerRedirect" type="button" color="secondary"  expand="block" >Register</ion-button>     
             </ion-item>
-              <!-- <ion-item>
-                <ion-label>Birthdate</ion-label>
-                <ion-datetime-button datetime="datetime"></ion-datetime-button>
-
-                <ion-modal :keep-contents-mounted="true">
-                  <ion-datetime id="datetime"></ion-datetime>
-                </ion-modal>
-              </ion-item> -->
-              <!-- <ion-item>
-                <ion-input ref="emailRef" type="email" labelPlacement="floating" label="Email"></ion-input>
-              </ion-item>
-              <ion-grid>
-                <ion-row>
-                  <ion-col class="ion-justify-content-center">
-                    <ion-button type="submit" color="primary"  expand="block" >Save</ion-button>
-                  </ion-col>
-                </ion-row>
-              </ion-grid> -->
         </ion-list>
       </form>
       </ion-content>
@@ -73,59 +55,63 @@
    } from '@ionic/vue';
    import { create, ellipsisHorizontal, stopwatch, water, listSharp, logOut, star } from 'ionicons/icons';
    import { useAppWriteAccount } from '../composable/useAppWriteAccount';
+   import  { localNotif } from '../composable/LocalNotification';
    import { ref,onMounted } from 'vue'
    import { Storage } from '@ionic/storage';
    const { login } = useAppWriteAccount();
 
+   const { notify } = localNotif();
+
     const emailRef = ref();
     const passwordRef = ref();
+    const tokenRef = ref();
     const isAlreadyRegistered = ref(null);
     const ionRouter = useIonRouter();
     const store = new Storage();
     store.create();
 
     const initialize = async () => {
+      notify();
       console.log(emailRef.value.$el.value);
       isAlreadyRegistered.value = await store.get('usersInfo');
       var email = await store.get('email');
       var password = await store.get('password');
-        emailRef.value.$el.value =  email;
-        passwordRef.value.$el.value = password;
-     
+      emailRef.value.$el.value =  email;
+      passwordRef.value.$el.value = password;
   };
 
     onMounted(()=>initialize())
 
     const loginSubmit = async () =>{
       
-      try {
+        try {
 
-        const response = await login(
-          emailRef.value.$el.value,
-          passwordRef.value.$el.value
-          )
+          const response = await login(
+            emailRef.value.$el.value,
+            passwordRef.value.$el.value
+            )
 
-          console.log(response);
-        if(response?.error) throw response.error;
-        store.set('email',emailRef.value.$el.value);
-        store.set('password',passwordRef.value.$el.value);
+            console.log(response);
+          if(response?.error) throw response.error;
+          store.set('email',emailRef.value.$el.value);
+          store.set('password',passwordRef.value.$el.value);
 
-        ionRouter.navigate('/hemo/', 'forward', 'replace');
+          ionRouter.navigate('/hemo/', 'forward', 'replace');
 
-      }catch (error) {
-      const alert = await alertController.create({
-            header: 'Error',
-            subHeader: 'Login Failed',
-            message: (error as Error).message,
-            buttons: ['OK'],
-          });
-      await alert.present();
-    }
-      
-
-
-
+        }catch (error) {
+          const alert = await alertController.create({
+              header: 'Error',
+              subHeader: 'Login Failed',
+              message: (error as Error).message,
+              buttons: ['OK'],
+            });
+          await alert.present();
+      }
     };
+
+   const registerRedirect = () =>{
+    ionRouter.navigate('/register/', 'forward', 'replace');
+   }
 
 
   </script>
@@ -197,5 +183,8 @@
         }
         
       }
+
+
+      
   </style>
   

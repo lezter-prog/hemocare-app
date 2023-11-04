@@ -31,6 +31,7 @@ export const useAppWriteAccount = ()=>{
             return {error, data:undefined}
         }
     }
+    
     const accountSession =async () => {
         try {
             const promise = await account.value?.get();

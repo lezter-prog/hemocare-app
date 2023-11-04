@@ -2,10 +2,16 @@
     <ion-page>
       <ion-header>
         <ion-toolbar color="secondary" style="text-align: center;">
+          <ion-buttons slot="start">
+                <ion-back-button></ion-back-button>
+            </ion-buttons>
           <ion-title>HELLO!</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content :fullscreen="true" style="background-color: #9FDBF3;">
+        <ion-refresher slot="fixed" @ionRefresh="handleRefresh($event)">
+          <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
         <ion-grid>
             <ion-row class="">
               <ion-col class="ion-justify-content-center">
@@ -20,7 +26,7 @@
                 <h5 >FLUID</h5>
                 </ion-text>
 
-                <ion-card class="card-color" style="height: 65%;">
+                <ion-card  router-link="./intake" router-direction="forward" class="card-color" style="height: 65%;">
                   <img src="/public/watericon.png" style="width: 100%;height: 100%;" alt="">
                 </ion-card>
                 
@@ -48,18 +54,22 @@
               </ion-text>
               </ion-col>
             </ion-row>
-           
-            <ion-row class="ion-margin-top">
+            
+            <ion-row v-if="showSpinner" class="ion-margin-top">
               <ion-col class="flex ion-justify-content-center" style="column-gap: 10px;" >
-                <ion-button :class="todayBtn" @click="buttonActive('today')" shape="round" >Today</ion-button>
-                <ion-button :class="yesterdayBtn" @click="buttonActive('yesterday')" shape="round">Yesterday</ion-button>
-                <ion-button :class="sevenDaysAgoBtn" @click="buttonActive('sevendaysAgo')" shape="round">Last 7d</ion-button>
+                <span class="loader"></span>
               </ion-col>
             </ion-row>
-           
+            <ion-row v-if="beforePageDone" class="ion-margin-top">
+              <ion-col class="flex ion-justify-content-center" style="column-gap: 10px;" >
+                <ion-button :class="todayBtn" @click="buttonActive('today')" shape="round" size="small">Today</ion-button>
+                <ion-button :class="yesterdayBtn" @click="buttonActive('yesterday')" shape="round" size="small">Yesterday</ion-button>
+                <ion-button :class="sevenDaysAgoBtn" @click="buttonActive('sevendaysAgo')" shape="round" size="small">Last 7d</ion-button>
+              </ion-col>
+            </ion-row>
             <ion-row v-if="todaySectionShow" class="">
               <ion-col class="flex ion-justify-content-center">
-                <ion-card class="section-color" style="width: 100%;height: 100%;margin:0">
+                <ion-card class="section-color" style="width: 100%;height: 100%;margin:0;padding: 4rem;">
                   <ion-text color="light">
                         <h5 style="margin:0"></h5>
                       </ion-text>
@@ -71,12 +81,12 @@
             </ion-row>
             <ion-row v-if="yesterdaySectionShow" class="">
               <ion-col class="flex ion-justify-content-center">
-                <ion-card class="section-color" style="width: 100%;height: 100%;margin:0">
+                <ion-card class="section-color" style="width: 100%;height: 100%;margin:0;padding: 4rem;">
                   <ion-text color="light">
                         <h5 style="margin:0"></h5>
                       </ion-text>
                       <ion-text color="black" >
-                        <h1 style="font-size: calc(5vw + 5vh + 8vmin); margin:0">{{ yesterdayFluid }}<span style="font-size: 2rem;">ml</span></h1>
+                        <h1 style="font-size: calc(5vw + 5vh + 8vmin); margin:0">{{ getYesterdayValue }}<span style="font-size: 2rem;">ml</span></h1>
                       </ion-text>
                 </ion-card>
               </ion-col>
@@ -100,6 +110,7 @@
     IonToolbar, 
     IonTitle, 
     IonContent, 
+    IonRefresher, IonRefresherContent,
     IonFab, 
     IonFabButton, 
     IonIcon,
@@ -109,8 +120,11 @@
     IonText,
     IonButton,
     IonButtons,
+    IonBackButton,
+    loadingController,
     IonLabel, IonSegment, IonSegmentButton,
-    IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle
+    IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,
+    useIonRouter
    } from '@ionic/vue';
    import { create, ellipsisHorizontal, stopwatch, water, listSharp, logOut, star } from 'ionicons/icons';
   import { add } from 'ionicons/icons';
@@ -118,10 +132,10 @@
   import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 
   import { useAppWriteAccount } from '../../composable/useAppWriteAccount';
-  import { ref,onMounted, onBeforeMount} from 'vue';
+  import { ref,onMounted, onBeforeMount,watch} from 'vue';
   import moment from 'moment';
   import { useAppwiteFluid } from '../../composable/useAppWriteFluid';
-
+  const ionRouter = useIonRouter();
   ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
   const { checkTodaysEntry, getLast7Days, getValueByDate } = useAppwiteFluid();
@@ -134,7 +148,7 @@
   const todayBtn = ref("btn-active");
   const yesterdayBtn = ref();
   const sevenDaysAgoBtn = ref();
-  const todaySectionShow = ref(true);
+  const todaySectionShow = ref(false);
   const todayFluid = ref();
 
   const yesterdaySectionShow = ref(false);
@@ -142,11 +156,47 @@
 
   const sevendaysSectionShow = ref(false);
   const sevendaysFluid = ref();
+  const header =  ref();
+
+  
+  const getYesterdayValue = ref();
+
+  const beforePageDone = ref(false);
+  const showSpinner = ref(true);
 
 const options = ref({
   responsive: true,
   maintainAspectRatio: false
 });
+
+
+
+const handleRefresh = async (event: CustomEvent) => {
+ 
+  setTimeout( async () => {
+        
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate()-1);
+        const response =  await checkTodaysEntry();
+        const yesterdayValue = await getValueByDate(yesterday);
+        todayFluid.value = response.data?.documents[0].total_fluid_taken_ml??0;
+        header.value =  await getLast7Days();
+        getYesterdayValue.value =yesterdayValue.data?.documents[0]?.total_fluid_taken_ml??0;
+        todaySectionShow.value=true;
+        yesterdaySectionShow.value=false;
+        sevendaysSectionShow.value=false;
+        todayBtn.value = "btn-active";
+        yesterdayBtn.value = "";
+        sevenDaysAgoBtn.value="";
+        event.detail.complete();
+      }, 2000);
+  
+        // event.target?.complete();
+  // setTimeout(async () => {
+        
+  //     }, 5000);
+    
+};
 
   const buttonActive = async (btn:String) =>{
 
@@ -158,36 +208,22 @@ const options = ref({
       yesterdayBtn.value = "";
       sevenDaysAgoBtn.value="";
     }else if(btn == "yesterday"){
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate()-1);
-      const getYesterdayValue = await getValueByDate(yesterday);
+     
       todaySectionShow.value=false;
       yesterdaySectionShow.value=true;
       sevendaysSectionShow.value=false;
-
-      yesterdayFluid.value = getYesterdayValue.data?.documents[0].total_fluid_taken_ml;
+      // yesterdayFluid.value = getYesterdayValue.value.data?.documents[0].total_fluid_taken_ml;
       todayBtn.value = "";
       yesterdayBtn.value = "btn-active";
       sevenDaysAgoBtn.value="";
     }else{
-      const header =  await getLast7Days();
       todaySectionShow.value=false;
       yesterdaySectionShow.value=false;
       sevendaysSectionShow.value=true;
       todayBtn.value = "";
       yesterdayBtn.value = "";
       sevenDaysAgoBtn.value="btn-active";
-
-      sevendaysFluid.value = {
-        labels: Last7DaysDates(),
-        datasets: [
-          {
-            label: 'Fluid Intake',
-            backgroundColor: '#f87979',
-            data: header.data?.value
-          }
-        ]
-      }
+      // console.log(header.value);
     }
 
   }
@@ -198,17 +234,22 @@ const options = ref({
        console.log(response);
     };
   
-    onBeforeMount(async () => {
+onBeforeMount(async () => {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate()-1);
     const response =  await checkTodaysEntry();
-
-    todayFluid.value = response.data?.documents[0].total_fluid_taken_ml;
-
-
-   
+    const yesterdayValue = await getValueByDate(yesterday);
+    todayFluid.value = response.data?.documents[0]?.total_fluid_taken_ml??0;
     
-  })
-      onMounted(()=>initialize())
+    
 
+    header.value =  await getLast7Days();
+    console.log(yesterdayValue);
+    getYesterdayValue.value =yesterdayValue.data?.documents[0]?.total_fluid_taken_ml??0;
+    
+    
+})
+onMounted(()=>initialize())
   const Last7DaysDates = ()=> {
     var result = [];
     for (var i=6; i>0; i--) {
@@ -219,6 +260,29 @@ const options = ref({
 
     return result;
   }
+
+watch( () => header, async (data) => {
+  console.log(data.value);
+  if (data.value != undefined) {
+    beforePageDone.value = true;
+    todaySectionShow.value=true;
+    sevendaysFluid.value = {
+          labels: Last7DaysDates(),
+          datasets: [
+            {
+              label: 'Fluid Intake',
+              backgroundColor: '#f87979',
+              data: await data.value.data?.value
+            }
+          ]
+        }
+        showSpinner.value =false;
+  }
+},{ deep: true })
+
+// const clickWater = ()=>{
+//   ionRouter.navigate('/hemo/fluid/intake', 'forward', 'replace');
+// }
   </script>
   
   <style>
@@ -238,12 +302,17 @@ const options = ref({
       padding: 10px;
       font-family: tt-lake-bold;
    }
+   .card-color:hover{
+      background-color: #a59ff3;
+      border: 5px solid rgb(69, 68, 103);
+      
+   }
 
    .section-color{
       background-color: snow;
-      border: 10px solid var(--ion-color-primary);
+      border: 20px solid var(--ion-color-primary);
       border-radius: 20px;
-      padding: 10px;
+      padding: 20px;
       font-family: tt-lake-bold;
    }
   
@@ -312,5 +381,25 @@ const options = ref({
         }
         
       }
+
+      .loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: #FF3D00;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
   </style>
   

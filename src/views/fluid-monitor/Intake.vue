@@ -156,7 +156,7 @@
 
   onBeforeMount(async () => {
     const response =  await checkTodaysEntry();
-    count.value = response.data?.documents[0].total_fluid_taken_ml;
+    count.value = response.data?.documents[0].total_fluid_taken_ml??0;
     if(count.value>0){
       measurement.value="measurement-good"
     }else if(count.value>1000){

@@ -5,6 +5,8 @@ import LoginPage from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Intake from '../views/fluid-monitor/Intake.vue';
 import Records from '../views/fluid-monitor/Record.vue';
+import listMedication from '../views/ListOfmedication.vue';
+import addNewMedecine from '../views/AddNewMedicine.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -24,8 +26,8 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/FluidMonitoring.vue')
       },
       {
-        path: 'tab2',
-        component: () => import('@/views/Tab2Page.vue')
+        path: 'medication',
+        component: () => import('@/views/Medication.vue')
       },
       {
         path: 'tab3',
@@ -61,6 +63,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/hemo/fluid/records',
     name: 'Records',
     component: Records
+  },
+  {
+    path: '/hemo/medication/list',
+    name: 'listMedication',
+    component: listMedication
+  },
+  {
+    path: '/hemo/medication/new',
+    name: 'newMedecine',
+    component: addNewMedecine
   },
 ]
 

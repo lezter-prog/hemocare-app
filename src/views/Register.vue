@@ -40,15 +40,8 @@
                 </ion-modal>
               </ion-item> -->
               <ion-item>
-                <ion-input ref="emailRef" type="email" labelPlacement="floating" label="Email"></ion-input>
+                <ion-input ref="emailRef" @keyup="makeEmailUserName" type="email" labelPlacement="floating" label="Email" required></ion-input>
               </ion-item>
-              <ion-grid>
-                <ion-row>
-                  <ion-col class="ion-justify-content-center">
-                    <ion-button type="submit" color="primary"  expand="block" >Save</ion-button>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
           </ion-item-group>
 
           <ion-item-group>
@@ -56,19 +49,19 @@
               <ion-label> Login Information </ion-label>
             </ion-item-divider>
             <ion-item>
-                <ion-input ref="userNameRef" type="text" labelPlacement="floating" label="Username" required></ion-input>
+                <ion-input ref="userNameRef" type="email" labelPlacement="floating" label="Username" required readonly></ion-input>
             </ion-item>
             <ion-item>
                 <ion-input ref="passwordRef" type="password" labelPlacement="floating" label="Password" required></ion-input>
               </ion-item>
             <ion-item>
-                <ion-input ref="retypePassordRef" type="number" labelPlacement="floating" label="Re-enter Password" required></ion-input>
+                <ion-input ref="retypePassordRef" type="password" labelPlacement="floating" label="Re-enter Password" required></ion-input>
             </ion-item>
-            
               <ion-grid>
                 <ion-row>
                   <ion-col class="ion-justify-content-center">
-                    <ion-button type="submit" color="primary"  expand="block" >Register</ion-button>
+                    <ion-button @click="createLoginInfo" type="button" color="primary"  expand="block" >Save</ion-button>
+                    <ion-button type="button" color="primary"  expand="block" router-link="./login" router-direction="forward">Login</ion-button>
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -94,9 +87,12 @@
      useIonRouter
     } from '@ionic/vue';
     import {ref} from 'vue';
-    import { useInternalStorage } from '../composable/InternalStorage';
+    import { Storage } from '@ionic/storage';
+    // import { useInternalStorage } from '../composable/InternalStorage';
+    import { useAppWriteAccount } from '../composable/useAppWriteAccount';
 
-    const { saveUsersInfo } = useInternalStorage();
+    // const { saveUsersInfo } = useInternalStorage();
+    const { createAccount } = useAppWriteAccount();
     const ionRouter = useIonRouter();
     const nameRef = ref();
     const contactRef = ref();
@@ -104,30 +100,115 @@
     const ageRef = ref();
     // const passwordRef = ref();
     // const confirmationPassRef = ref();
+    const userNameRef = ref();
+    const passwordRef = ref();
+    const retypePassordRef = ref();
+
+    const store = new Storage();
+    store.create();
+
+    const makeEmailUserName =()=>{
+      userNameRef.value.$el.value = emailRef.value.$el.value;
+    }
 
     const saveUserInformation = async ()=>{
       console.log("Saving Started");
-      try {
-        const saving = await saveUsersInfo(
-              nameRef.value.$el.value,
-              ageRef.value.$el.value,
-              contactRef.value.$el.value,
-              emailRef.value.$el.value,
-              );
+      // try {
+      //   const saving = await saveUsersInfo(
+      //         nameRef.value.$el.value,
+      //         ageRef.value.$el.value,
+      //         contactRef.value.$el.value,
+      //         emailRef.value.$el.value,
+      //         );
 
-        if(saving?.error) throw saving.error;
-        console.log(saving);
-        ionRouter.navigate('/hemo/', 'forward', 'replace');
-      } catch (error) {
+      //   if(saving?.error) throw saving.error;
+      //   const alert = await alertController.create({
+      //     header: 'Success',
+      //     subHeader: 'Saving Information Success',
+      //     message: '',
+      //     buttons: ['OK'],
+      //   });
+      //   await alert.present();
+      //   // ionRouter.navigate('/hemo/', 'forward', 'replace');
+      // } catch (error) {
+      //   const alert = await alertController.create({
+      //     header: 'Error',
+      //     subHeader: 'Failed Registration',
+      //     message: (error as Error).message,
+      //     buttons: ['OK'],
+      //   });
+      //   await alert.present();
+      // }
+     
+    }
+
+    const createLoginInfo = async ()=>{
+
+      if(passwordRef.value.$el.value == retypePassordRef.value.$el.value){
+        if(passwordRef.value.$el.value.length >=8){
+          try{
+            const create = await createAccount(
+            emailRef.value.$el.value,
+            passwordRef.value.$el.value,
+            nameRef.value.$el.value
+            )
+            if(create.error == null){
+              store.set('email',emailRef.value.$el.value);
+              store.set('password',passwordRef.value.$el.value);
+              const alertButtons = [
+                  {
+                    text: 'OK',
+                    role: 'confirm',
+                    handler: () => {
+                      ionRouter.navigate('/login', 'forward', 'replace');
+                    },
+                  },
+                ];
+
+              const alert = await alertController.create({
+                header: 'Success',
+                subHeader: 'Account Creation Success',
+                message: '',
+                buttons: alertButtons,
+              });
+              await alert.present();
+            }else{
+              return{
+                data:create,
+                error:create.error
+              }
+            }
+          }catch(error){
+            const alert = await alertController.create({
+              header: 'Error',
+              subHeader: 'Account Creation Failed',
+              message: (error as Error).message,
+              buttons: ['OK'],
+            });
+            await alert.present();
+          }
+
+        }else{
+          const alert = await alertController.create({
+          header: 'Error',
+          subHeader: 'Failed Registration',
+          message: 'Invalid Password, The required password length is 8',
+          buttons: ['OK'],
+          });
+          await alert.present();
+          return;
+        }
+
+      }else{
         const alert = await alertController.create({
           header: 'Error',
           subHeader: 'Failed Registration',
-          message: (error as Error).message,
+          message: 'Password are not Equal',
           buttons: ['OK'],
         });
         await alert.present();
+        return;
       }
-     
     }
   </script>
   

@@ -55,12 +55,11 @@
    } from '@ionic/vue';
    import { create, ellipsisHorizontal, stopwatch, water, listSharp, logOut, star } from 'ionicons/icons';
    import { useAppWriteAccount } from '../composable/useAppWriteAccount';
-   import  { localNotif } from '../composable/LocalNotification';
    import { ref,onMounted } from 'vue'
    import { Storage } from '@ionic/storage';
    const { login } = useAppWriteAccount();
 
-   const { notify } = localNotif();
+   
 
     const emailRef = ref();
     const passwordRef = ref();
@@ -71,7 +70,6 @@
     store.create();
 
     const initialize = async () => {
-      notify();
       console.log(emailRef.value.$el.value);
       isAlreadyRegistered.value = await store.get('usersInfo');
       var email = await store.get('email');

@@ -13,7 +13,7 @@
           <ion-label>Medication</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab3" href="/hemo/tab3" > 
+        <ion-tab-button tab="tab3" href="/hemo/blog/post" > 
           <ion-icon aria-hidden="true" :icon="listCircle" />
           <ion-label>Blogs</ion-label>
         </ion-tab-button>

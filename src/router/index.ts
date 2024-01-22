@@ -1,12 +1,18 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../views/TabsPage.vue';
+import AdminTabs from '../views/AdminTabs.vue';
 import LoginPage from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Intake from '../views/fluid-monitor/Intake.vue';
 import Records from '../views/fluid-monitor/Record.vue';
 import listMedication from '../views/ListOfmedication.vue';
 import addNewMedecine from '../views/AddNewMedicine.vue';
+import BlogPost from '../views/BlogPost.vue';
+import Dietary from '../views/DietaryTips.vue';
+import Admin from '../views/Admin.vue';
+
+
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -30,8 +36,8 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Medication.vue')
       },
       {
-        path: 'tab3',
-        component: () => import('@/views/Tab3Page.vue')
+        path: 'blog',
+        component: () => import('@/views/Blog.vue')
       },
       {
         path: 'tab4',
@@ -73,6 +79,39 @@ const routes: Array<RouteRecordRaw> = [
     path: '/hemo/medication/new',
     name: 'newMedecine',
     component: addNewMedecine
+  },
+  {
+    path: '/hemo/blog/post',
+    name: 'blogPost',
+    component: BlogPost
+  },
+  {
+    path: '/hemo/blog/post/dietary/tips',
+    name: 'dietary',
+    component: Dietary
+  },
+  {
+    path: '/hemo/admin/',
+    name: 'admin',
+    component: AdminTabs,
+    children:[
+      {
+        path: '',
+        redirect: 'hemo/admin/fluid'
+      },
+      {
+        path: 'fluid',
+        component: () => import('@/views/AdminFluid.vue')
+      },
+      {
+        path: 'medication',
+        component: () => import('@/views/AdminMedication.vue')
+      },
+      {
+        path: 'schedule',
+        component: () => import('@/views/AdminSchedule.vue')
+      },
+    ]
   },
 ]
 

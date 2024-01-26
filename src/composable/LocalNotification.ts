@@ -41,9 +41,9 @@ export const localNotif = () => {
         
     }
     const schedule =async (title:any,body:any, schedule:any) => {
-      requestPermission();
+     await requestPermission();
       var actionType ="1";
-      registerActionTypes(actionType);
+      await registerActionTypes(actionType);
 
       LocalNotifications.schedule({
           notifications: [
@@ -54,7 +54,6 @@ export const localNotif = () => {
               actionTypeId:actionType ,
               schedule: {
                 on: {
-                  
                   minute:0
                 }
               }
@@ -64,24 +63,22 @@ export const localNotif = () => {
         });
       
   }
-  const onceAday = async (medecine:Array<String>,schedule:string)=>{
-    requestPermission();
+  const onceAday = async (medecine:any,schedule:string)=>{
+    await requestPermission();
     var actionType ="medecine";
-    var medecines ="";
-    medecine.forEach(med =>{
-      medecines = (medecines !="")?medecines+med:medecines+", "+med;
-    });
     var sched = schedule.split(":");
+    let randomId = Math.floor(Math.random() * 10000) + 1;
   
-    registerActionTypes(actionType);
+    await registerActionTypes(medecine.$id);
     LocalNotifications.schedule({
         notifications: [
           {
-            id: parseFloat(sched[0]),
+            id: randomId,
             title: "Take your medicine",
-            body: "You have a Schedule to take "+medecines,
+            body: "You have a Schedule to take "+medecine?.name,
             actionTypeId: actionType,
-            schedule: {
+            schedule: { 
+              allowWhileIdle: true,
               on: {
                 hour:parseFloat(sched[0]),
                 minute:parseFloat(sched[1])
@@ -93,8 +90,8 @@ export const localNotif = () => {
       });
     
   }
-  const everyFourHours = async (medecine:Array<String>)=>{
-    requestPermission();
+  const everyFourHours = async (medecine:any)=>{
+    await requestPermission();
     sixAMNotify(medecine);
     TenAMNotify(medecine);
     twoPMNotify(medecine);
@@ -105,37 +102,38 @@ export const localNotif = () => {
 
   // from 6am-12pm-6pm-12am,
 
-    const everySixHours = async (medecine:Array<String>)=>{
-        requestPermission();
+    const everySixHours = async (medecine:any)=>{
+      await requestPermission();
         sixAMNotify(medecine);
         twelvePMNotify(medecine);
         sixPMNotify(medecine);
         twelveAMNotify(medecine);
     }
-    const twiceADay = async(medecine:Array<String>)=>{
-      requestPermission();
+    const twiceADay = async(medecine:any)=>{
+      await requestPermission();
       eightAMNotify(medecine);
       eightPMNotify(medecine);
   }
-  const eightAMNotify = (medecine:Array<String>)=>{
+  const eightAMNotify = async(medecine:any)=>{
       
     var actionType ="medecine";
     var medecines ="";
-    medecine.forEach(med =>{
-      medecines = (medecines !="")?medecines+med:medecines+", "+med;
-    });
+    // medecine.forEach(med =>{
+    //   medecines = (medecines !="")?medecines+med:medecines+", "+med;
+    // });
   
-    registerActionTypes(actionType);
+    await registerActionTypes(medecine.$id+"eightAM");
     LocalNotifications.schedule({
         notifications: [
           {
             id: 8,
             title: "Take your medicine",
-            body: "You have a Schedule to take "+medecines,
+            body: "You have a Schedule to take "+medecine?.name,
             actionTypeId: actionType,
             schedule: {
+              allowWhileIdle: true,
               on: {
-                hour:6,
+                hour:8,
                 minute:0
               }
             }
@@ -144,25 +142,26 @@ export const localNotif = () => {
         ]
       });
   }
-  const eightPMNotify = (medecine:Array<String>)=>{
+  const eightPMNotify = (medecine:any)=>{
       
     var actionType ="medecine";
     var medecines ="";
-    medecine.forEach(med =>{
-      medecines = (medecines !="")?medecines+med:medecines+", "+med;
-    });
+    // medecine.forEach(med =>{
+    //   medecines = (medecines !="")?medecines+med:medecines+", "+med;
+    // });
   
-    registerActionTypes(actionType);
+   
     LocalNotifications.schedule({
         notifications: [
           {
             id: 20,
             title: "Take your medicine",
-            body: "You have a Schedule to take "+medecines,
+            body: "You have a Schedule to take "+medecine?.name,
             actionTypeId: actionType,
             schedule: {
+              allowWhileIdle: true,
               on: {
-                hour:6,
+                hour:20,
                 minute:0
               }
             }
@@ -172,23 +171,23 @@ export const localNotif = () => {
       });
   }
 
-    const sixAMNotify = (medecine:Array<String>)=>{
+    const sixAMNotify = (medecine:any)=>{
       
       var actionType ="medecine";
       var medecines ="";
-      medecine.forEach(med =>{
-        medecines = (medecines !="")?medecines+med:medecines+", "+med;
-      });
+      // medecine.forEach(med =>{
+      //   medecines = (medecines !="")?medecines+med:medecines+", "+med;
+      // });
     
-      registerActionTypes(actionType);
       LocalNotifications.schedule({
           notifications: [
             {
               id: 6,
               title: "Take your medicine",
-              body: "You have a Schedule to take "+medecines,
+              body: "You have a Schedule to take "+medecine?.name,
               actionTypeId: actionType,
               schedule: {
+                allowWhileIdle: true,
                 on: {
                   hour:6,
                   minute:0
@@ -200,23 +199,24 @@ export const localNotif = () => {
         });
     }
 
-    const twelvePMNotify = (medecine:Array<String>)=>{
+    const twelvePMNotify = (medecine:any)=>{
       var actionType ="medecine";
       var medecines ="";
-      medecine.forEach(med =>{
-        medecines = (medecines !="")?medecines+med:medecines+","+med;
-      });
-      registerActionTypes(actionType);
+      // medecine.forEach(med =>{
+      //   medecines = (medecines !="")?medecines+med:medecines+","+med;
+      // });
+      
       LocalNotifications.schedule({
           notifications: [
             {
               id: 12,
               title: "Take your medicine",
-              body: "You have a Schedule to take "+medecines,
+              body: "You have a Schedule to take "+medecine?.name,
               actionTypeId: actionType,
               schedule: {
+                allowWhileIdle: true,
                 on: {
-                  hour:6,
+                  hour:12,
                   minute:0
                 }
               }
@@ -225,23 +225,24 @@ export const localNotif = () => {
           ]
         });
     }
-    const sixPMNotify = (medecine:Array<String>)=>{
+    const sixPMNotify = (medecine:any)=>{
       var actionType ="medecine";
       var medecines ="";
-      medecine.forEach(med =>{
-        medecines = (medecines !="")?medecines+med:medecines+","+med;
-      });
-      registerActionTypes(actionType);
+      // medecine.forEach(med =>{
+      //   medecines = (medecines !="")?medecines+med:medecines+","+med;
+      // });
+     
       LocalNotifications.schedule({
           notifications: [
             {
               id: 18,
               title: "Take your medicine",
-              body: "You have a Schedule to take "+medecines,
+              body: "You have a Schedule to take "+medecine?.name,
               actionTypeId: actionType,
               schedule: {
+                allowWhileIdle: true,
                 on: {
-                  hour:6,
+                  hour:18,
                   minute:0
                 }
               }
@@ -251,51 +252,52 @@ export const localNotif = () => {
         });
     }
 
-    const twelveAMNotify = (medecine:Array<String>)=>{
+    const twelveAMNotify = (medecine:any)=>{
       var actionType ="medecine";
       var medecines ="";
-      medecine.forEach(med =>{
-        medecines = (medecines !="")?medecines+med:medecines+","+med;
-      });
-      registerActionTypes(actionType);
+      // medecine.forEach(med =>{
+      //   medecines = (medecines !="")?medecines+med:medecines+","+med;
+      // });
+    
       LocalNotifications.schedule({
           notifications: [
             {
               id: 24,
               title: "Take your medicine",
-              body: "You have a Schedule to take "+medecines,
+              body: "You have a Schedule to take "+medecine?.name,
               actionTypeId: actionType,
               schedule: {
+                allowWhileIdle: true,
                 on: {
-                  hour:6,
+                  hour:0,
                   minute:0
                 }
               }
             },
-            
           ]
         });
     }
 
     //  6am-10am-2pm-6pm-10pm-2am
 
-    const twoPMNotify = (medecine:Array<String>)=>{
+    const twoPMNotify = (medecine:any)=>{
       var actionType ="medecine";
       var medecines ="";
-      medecine.forEach(med =>{
-        medecines = (medecines !="")?medecines+med:medecines+","+med;
-      });
-      registerActionTypes(actionType);
+      // medecine.forEach(med =>{
+      //   medecines = (medecines !="")?medecines+med:medecines+","+med;
+      // });
+     
       LocalNotifications.schedule({
           notifications: [
             {
               id: 14,
               title: "Take your medicine",
-              body: "You have a Schedule to take "+medecines,
+              body: "You have a Schedule to take "+medecine?.name,
               actionTypeId: actionType,
               schedule: {
+                allowWhileIdle: true,
                 on: {
-                  hour:6,
+                  hour:14,
                   minute:0
                 }
               }
@@ -305,23 +307,24 @@ export const localNotif = () => {
         });
     }
 
-    const TenAMNotify = (medecine:Array<String>)=>{
+    const TenAMNotify = (medecine:any)=>{
       var actionType ="medecine";
       var medecines ="";
-      medecine.forEach(med =>{
-        medecines = (medecines !="")?medecines+med:medecines+","+med;
-      });
-      registerActionTypes(actionType);
+      // medecine.forEach(med =>{
+      //   medecines = (medecines !="")?medecines+med:medecines+","+med;
+      // });
+     
       LocalNotifications.schedule({
           notifications: [
             {
               id: 10,
               title: "Take your medicine",
-              body: "You have a Schedule to take "+medecines,
+              body: "You have a Schedule to take "+medecine?.name,
               actionTypeId: actionType,
               schedule: {
+                allowWhileIdle: true,
                 on: {
-                  hour:6,
+                  hour:10,
                   minute:0
                 }
               }
@@ -331,39 +334,43 @@ export const localNotif = () => {
         });
     }
 
-    const tenPMNotify = (medecine:Array<String>)=>{
+    const tenPMNotify = (medecine:any)=>{
       var actionType ="medecine";
       var medecines ="";
-      medecine.forEach(med =>{
-        medecines = (medecines !="")?medecines+med:medecines+","+med;
-      });
-      registerActionTypes(actionType);
+      // medecine.forEach(med =>{
+      //   medecines = (medecines !="")?medecines+med:medecines+","+med;
+      // });
+    
       LocalNotifications.schedule({
           notifications: [
             {
-              id: 14,
+              id: 22,
               title: "Take your medicine",
-              body: "You have a Schedule to take "+medecines,
+              body: "You have a Schedule to take "+medecine?.name,
               actionTypeId: actionType,
               schedule: {
+                allowWhileIdle: true,
                 on: {
-                  hour:6,
+                  hour:22,
                   minute:0
                 }
               }
-            },
-            
+            }
           ]
         });
     }
 
+    const getPending = async () => {
+      return await LocalNotifications.getPending();
+    }
     return{
          notify,
          schedule,
          onceAday,
          everyFourHours,
          everySixHours,
-         twiceADay
+         twiceADay,
+         getPending
     }
     
 }

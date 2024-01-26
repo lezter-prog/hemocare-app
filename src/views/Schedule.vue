@@ -15,43 +15,42 @@
             <ion-row class="mb-3">
               <ion-col class="ion-justify-content-center">
                 <ion-text color="light">
-                <h1>Medication</h1>
+                <h1>Schedule</h1>
               </ion-text>
               </ion-col>
             </ion-row>
             <ion-row class="ion-margin-top">
               <ion-col class="flex ion-justify-content-center">
                 <div class="border-circle">
-                  <img class="middle-icon" src="/public/medecine.png" />
+                  <img class="middle-icon" src="/public/schedule.png" />
                 </div>
               </ion-col>
             </ion-row>
             <ion-row style="margin-top: 3rem;">
              
               <ion-col class="ion-justify-content-center">
-                
-                  <ion-button shape="round" color="light" size="large" style="width:200px;" router-link="./medication/list" >
-                  <!-- <ion-icon :icon="listSharp" size="large"></ion-icon> -->
-                 Medication
-                </ion-button>
+                <!-- <ion-button shape="round" size="large"> Records</ion-button> -->
+                <ion-button shape="round" color="light" size="large"  router-link="./blog/post" router-direction="forward">
+                    <!-- <ion-icon :icon="listSharp" size="large"></ion-icon> -->
+                    Schedule
+                  </ion-button>
               </ion-col>
             </ion-row>
+           
             <ion-row style="margin: 3rem 0 1rem 1rem;">
-           
-           <ion-col size="10" class="ion-justify-content-center ">
-             <!-- <ion-button shape="round" size="large"> Records</ion-button> -->
-             <ion-card style="margin: 0;">
-
-              <ion-card-content style="text-transform: none;">
-              {{ tip }}
-              </ion-card-content>
-            </ion-card>
-           </ion-col>
-           <ion-col class="">
-              <img src="/public/kidney1.png" height="70" alt="">
-           </ion-col>
-         </ion-row>
-           
+             <ion-col size="10" class="ion-justify-content-center ">
+               <!-- <ion-button shape="round" size="large"> Records</ion-button> -->
+               <ion-card style="margin: 0;">
+  
+                <ion-card-content style="text-transform: none;">
+                {{ tip }}
+                </ion-card-content>
+              </ion-card>
+             </ion-col>
+             <ion-col class="">
+                <img src="/public/kidney1.png" height="70" alt="">
+             </ion-col>
+           </ion-row>
         </ion-grid>
         <!-- <ExploreContainer name="Tab 1 page" /> -->
       </ion-content>
@@ -72,33 +71,39 @@
     IonRow,
     IonText,
     IonButton,
-    IonButtons
+    IonButtons,
+    IonCard,
+    IonCardContent
    } from '@ionic/vue';
    import { create, ellipsisHorizontal, stopwatch, water, listSharp, logOut, star } from 'ionicons/icons';
   import { add } from 'ionicons/icons';
   import { useAppWriteAccount } from '../composable/useAppWriteAccount';
   import { ref,onMounted } from 'vue';
   import tiplist from '../composable/TipList.json';
-  const tips =  ref(tiplist);
-  let randomId = Math.floor(Math.random() * tips.value.length) + 1;
-tips.value[randomId-1];
-const tip = ref(tips.value[randomId-1]);
-setInterval(storeTip, 5000);
   
   const { accountSession } =  useAppWriteAccount();
   
+  const tips =  ref(tiplist);
+  let randomId = Math.floor(Math.random() * tips.value.length) + 1;
+  tips.value[randomId-1];
+  const tip = ref(tips.value[randomId-1]);
+  setInterval(storeTip, 5000);
   
   const initialize = async () => {
        
        const response = await accountSession();
        console.log(response);
+       
     };
-function storeTip(){
-  let randomId = Math.floor(Math.random() * tips.value.length) + 1;
-  tip.value = tips.value[randomId-1];
-}
   
       onMounted(()=>initialize())
+  
+      
+  
+  function storeTip(){
+    let randomId = Math.floor(Math.random() * tips.value.length) + 1;
+    tip.value = tips.value[randomId-1];
+  }
   </script>
   
   <style>

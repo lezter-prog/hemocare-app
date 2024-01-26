@@ -14,33 +14,29 @@
             <ion-icon size="large" :icon="add"></ion-icon>
           </ion-fab-button>
         </ion-fab> -->
-        <ion-grid>
-        <ion-row>
-            <ion-col>
-                <img  height="150" width="300"
-                    src="/public/care1.jpeg"
-                />
-            </ion-col>
-            <ion-col>
-                <img  height="150" width="300"
-                src="/public/care2.jpg"
-                />
-            </ion-col>
-            <ion-col>
-                <img  height="150" width="300"
-                src="/public/care3.webp"/>
-            </ion-col>
-            </ion-row>
-            
-            <ion-row>
-                <ion-col style="background-color: white;">
-                <img height="300"
-                    src="/public/care3.webp"/>
-            </ion-col>
-        </ion-row>  
+        <ion-grid style="background-color: white;">
+              <ion-row>
+                  <ion-col>
+                      <img  height="150" width="300"
+                          src="/public/care1.jpeg"
+                      />
+                  </ion-col>
+                  <ion-col>
+                      <img  height="150" width="300"
+                      src="/public/care2.jpg"
+                      />
+                  </ion-col>
+                  <ion-col>
+                      <img  height="150" width="300"
+                      src="/public/care3.webp"/>
+                  </ion-col>
+                </ion-row>
+                
+                 
 
             <ion-row >
-                <ion-col style="background-color: white;display: flex;justify-content: space-between;flex-direction: row;">
+              <img src="/public/care3.webp"/>
+                <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
                 <ion-text>
                         <h1 style="margin-top:5px; font-size: 23px;">CREATE YOUR DIET PLAN</h1>
                 </ion-text>
@@ -54,23 +50,22 @@
                 </div>
                </ion-col>
             </ion-row>
-            <ion-row>
-                <ion-col style="background-color: white;display: flex;justify-content: space-between;flex-direction: row;">
-                
-                    <img height="250" width="200" src="/public/care3.webp" />
-                
-                <div style="display: flex;flex-direction: column;align-items: flex-end; padding: 18px; ">
-                    <ion-text style="text-align: left;" >
-                            <h1 style="margin-top:5px; font-size: 25px;">HOW TO READ NUTRITION FACTS</h1>        
-                    </ion-text>
-                    <ion-button fill="clear" router-link="post/dietary/tips" router-direction="forward">
+
+            <ion-row >
+              <img src="/public/care3.webp"/>
+                <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
+                <ion-text>
+                        <h1 style="margin-top:5px; font-size: 23px;">Diet Advice</h1>
+                </ion-text>
+                <div style="background-color: white; ">
+                    <ion-button fill="clear" router-link="post/diet/advice" router-direction="forward" >
                        Read Article
                         <ion-icon  slot="end" :icon="chevronForward"></ion-icon>
                    </ion-button>
                 </div>
-                    
-                </ion-col>
+               </ion-col>
             </ion-row>
+          
         </ion-grid>
       </ion-content>
     </ion-page> 

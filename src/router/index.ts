@@ -10,6 +10,7 @@ import listMedication from '../views/ListOfmedication.vue';
 import addNewMedecine from '../views/AddNewMedicine.vue';
 import BlogPost from '../views/BlogPost.vue';
 import Dietary from '../views/DietaryTips.vue';
+import DietAdvice from '../views/DietAdvice.vue';
 import Admin from '../views/Admin.vue';
 
 
@@ -40,8 +41,8 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Blog.vue')
       },
       {
-        path: 'tab4',
-        component: () => import('@/views/Tab4Page.vue')
+        path: 'schedule',
+        component: () => import('@/views/Schedule.vue')
       }
     ]
   },
@@ -89,6 +90,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/hemo/blog/post/dietary/tips',
     name: 'dietary',
     component: Dietary
+  },
+  {
+    path: '/hemo/blog/post/diet/advice',
+    name: 'dietAdvice',
+    component: DietAdvice
   },
   {
     path: '/hemo/admin/',

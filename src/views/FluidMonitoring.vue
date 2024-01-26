@@ -43,23 +43,47 @@
           </ion-row>
           <ion-row style="margin-top: 3rem;">
             <ion-col class="ion-justify-content-center">
-              <ion-text color="light" style="font-family: tt-lake-bold;">
+              <!-- <ion-text color="light" style="font-family: tt-lake-bold;">
               <h5>FLUID</h5>
               </ion-text>
               <ion-button class="output" shape="round"  size="large" router-link="./fluid/intake" router-direction="forward"  >
                   <ion-icon :icon="water" size="large"></ion-icon>
+                </ion-button> -->
+                <ion-button shape="round" color="light" size="large" style="width:150px;" router-link="./fluid/intake" router-direction="forward" >
+                  <!-- <ion-icon :icon="listSharp" size="large"></ion-icon> -->
+                 Fluid
                 </ion-button>
             </ion-col>
             <ion-col class="ion-justify-content-center">
-              <ion-text color="light">
+              <!-- <ion-text color="light">
                 <h5>Records</h5>
               </ion-text>
-              <!-- <ion-button shape="round" size="large"> Records</ion-button> -->
+              <ion-button shape="round" size="large"> Records</ion-button>
               <ion-button class="records" shape="round"  size="large" router-link="./fluid/records" router-direction="forward">
                   <ion-icon :icon="listSharp" size="large"></ion-icon>
+                </ion-button> -->
+                <ion-button shape="round" color="light" size="large" style="width:150px;" router-link="./fluid/records" router-direction="forward" >
+                  <!-- <ion-icon :icon="listSharp" size="large"></ion-icon> -->
+                 Record
                 </ion-button>
             </ion-col>
           </ion-row>
+
+          <ion-row style="margin: 3rem 0 1rem 1rem;">
+           
+           <ion-col size="10" class="ion-justify-content-center ">
+             <!-- <ion-button shape="round" size="large"> Records</ion-button> -->
+             <ion-card style="margin: 0;">
+
+              <ion-card-content style="text-transform: none;">
+              {{ tip }}
+              </ion-card-content>
+            </ion-card>
+           </ion-col>
+           <ion-col class="">
+              <img src="/public/kidney1.png" height="70" alt="">
+           </ion-col>
+         </ion-row>
          
       </ion-grid>
       <!-- <ExploreContainer name="Tab 1 page" /> -->
@@ -87,6 +111,12 @@ import { IonPage,
 import { add } from 'ionicons/icons';
 import { useAppWriteAccount } from '../composable/useAppWriteAccount';
 import { ref,onMounted } from 'vue';
+import tiplist from '../composable/TipList.json';
+  const tips =  ref(tiplist);
+  let randomId = Math.floor(Math.random() * tips.value.length) + 1;
+tips.value[randomId-1];
+const tip = ref(tips.value[randomId-1]);
+setInterval(storeTip, 5000);
 
 const { accountSession } =  useAppWriteAccount();
 
@@ -96,6 +126,11 @@ const initialize = async () => {
      const response = await accountSession();
      console.log(response);
   };
+
+function storeTip(){
+  let randomId = Math.floor(Math.random() * tips.value.length) + 1;
+  tip.value = tips.value[randomId-1];
+}
 
     onMounted(()=>initialize())
 </script>

@@ -14,7 +14,7 @@
           <ion-title size="large">Add Medication</ion-title>
         </ion-toolbar>
       </ion-header>
-      <form>
+      <form @submit.prevent="addNewMedecine" >
         <ion-list>
           <ion-item-group>
             <ion-item>
@@ -55,7 +55,7 @@
               <ion-grid>
                 <ion-row>
                   <ion-col class="ion-justify-content-center">
-                    <ion-button @click="addNewMedecine()" type="button" color="primary"  expand="block" >Save</ion-button>
+                    <ion-button type="submit" color="primary"  expand="block" >Save</ion-button>
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -95,7 +95,7 @@
     
 
     const { inputMedication, getAllMedecineBySchedule } = useAppWriteMedication();
-    const { notify,schedule,onceAday,twiceADay,everyFourHours,everySixHours } = localNotif();
+    const { notify,schedule,onceAday,twiceADay,everyFourHours,everySixHours, getPending } = localNotif();
     const ionRouter = useIonRouter();
     const medecineNameRef = ref();
     const amountRef = ref();
@@ -137,6 +137,8 @@
 
     const addNewMedecine = async ()=>{
       try{
+
+
         if(scheduleRef.value == "onceADay"){
           scheduleRef.value = moment(selectedTimeRef.value.$el.value).format('HH:mm');
         }
@@ -148,25 +150,29 @@
         );
         console.log(response);
 
-        const medecines =  await getAllMedecineBySchedule(createSchedule());
-        var array =  new Array<String>();
-         medecines.data?.documents.forEach(data=>{
-          array.push(data.name);
-        })
+        // const medecines =  await getAllMedecineBySchedule(createSchedule());
+        // var array =  new Array<String>();
+        //  medecines.data?.documents.forEach(data=>{
+        //   array.push(data.name);
+        // })
         
         if(response?.data != undefined){
           console.log("success");
           // notify("New Medicine","You Havea new Medicine Scheduled");
           // schedule("Hemocare Medicinal Scheule","You Have schedule","");
           if(response?.data.schedule == "everySixHours"){
-            everySixHours(array);
+            await everySixHours(response?.data);
           }else if(response?.data.schedule == "everyFourHours"){
-            everyFourHours(array);
+            await everyFourHours(response?.data);
           }else if(response?.data.schedule == "twiceADay"){
-            twiceADay(array);
+            await twiceADay(response?.data);
           }else{
-            onceAday(array,response?.data.schedule);
+            await onceAday(response?.data,response?.data.schedule);
           }
+          const pending = await getPending();
+          console.log(pending);
+          ionRouter.push('./list');
+
         }
 
         }catch(error){

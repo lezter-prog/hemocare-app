@@ -11,6 +11,9 @@ import addNewMedecine from '../views/AddNewMedicine.vue';
 import BlogPost from '../views/BlogPost.vue';
 import Dietary from '../views/DietaryTips.vue';
 import DietAdvice from '../views/DietAdvice.vue';
+import Reminders from '../views/Reminders.vue';
+import Kidneys from '../views/Kidneys.vue';
+import DetectChronicKidneyDisease from '../views/DetectChronicKidneyDisease.vue';
 import Admin from '../views/Admin.vue';
 
 
@@ -95,6 +98,21 @@ const routes: Array<RouteRecordRaw> = [
     path: '/hemo/blog/post/diet/advice',
     name: 'dietAdvice',
     component: DietAdvice
+  },
+  {
+    path: '/hemo/blog/post/chronic-disease',
+    name: 'detectchronickidneydisease',
+    component: DetectChronicKidneyDisease
+  },
+  {
+    path: '/hemo/blog/post/about-kidneys',
+    name: 'kidneys',
+    component: Kidneys
+  },
+  {
+    path: '/hemo/blog/post/reminders',
+    name: 'remiders',
+    component: Reminders
   },
   {
     path: '/hemo/admin/',

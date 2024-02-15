@@ -99,7 +99,7 @@
                         <h1 style="margin-top:5px; font-size: 23px;">8 Golden Rules</h1>
                 </ion-text>
                 <div style="background-color: white; ">
-                    <ion-button fill="clear" router-link="post/diet/advice" router-direction="forward" >
+                    <ion-button fill="clear" router-link="post/8-golden-rules" router-direction="forward" >
                        Read Article
                         <ion-icon  slot="end" :icon="chevronForward"></ion-icon>
                    </ion-button>
@@ -114,7 +114,7 @@
                         <h1 style="margin-top:5px; font-size: 23px;">How to read nutrition facts</h1>
                 </ion-text>
                 <div style="background-color: white; ">
-                    <ion-button fill="clear" router-link="post/diet/advice" router-direction="forward" >
+                    <ion-button fill="clear" router-link="post/nutrition-facts" router-direction="forward" >
                        Read Article
                         <ion-icon  slot="end" :icon="chevronForward"></ion-icon>
                    </ion-button>

@@ -5,7 +5,7 @@
             <ion-buttons slot="start">
                 <ion-back-button></ion-back-button>
             </ion-buttons>
-          <ion-title>How to detect chronic kidney disease</ion-title>
+          <ion-title>Did You know that your kidneys</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content :fullscreen="true">
@@ -17,124 +17,168 @@
         <ion-grid style="background-color: white;">
             
             <ion-row>
-                <img src="/public/ckd/84.png" alt="">
+                <img src="/public/kidney/100.png" alt="">
             </ion-row>
-            
-            <ion-grid>
-                <ion-row>
-                <ion-col size="auto"><img src="/public/ckd/85.png" alt="" width="100" height="100"></ion-col>
-                <ion-col><ion-text class="" style="text-transform: none;font-weight: normal;">
-                            As you embark on hemodialysis, various adjustments to your daily routine may be necessary. Your physician likely emphasized the potential need for dietary modifications. Your well-being will be influenced by factors such as:
-                        </ion-text>
-                </ion-col>
-                
-                </ion-row>
-            </ion-grid>
-             
-            <ion-grid>
-                <ion-row>
-                <ion-col size="auto"><img src="/public/ckd/86.png" alt="" width="200" height="150"></ion-col>
-                <ion-col><ion-text class="" style="text-transform: none;font-weight: normal;">
-                    But it can be detected by simple tests: a urine test to check if there is any protein in your urine, 
-                    or a blood test to measure the level of creatinine in your blood.
-                        </ion-text>
-                </ion-col>
-                
-                </ion-row>
-            </ion-grid>
-
             <ion-text class="" style="text-transform: none;font-weight: normal; font-size: x-large;">
-                Signs of advancing CKD include: 
-                        </ion-text>
+                Why Are the Kidneys So Important?
+            </ion-text>
+            
+            <ion-row><ion-text class="" style="text-transform: none;font-weight: normal; padding-top: 10px;">
+                Most people know that a major function of the kidneys is to remove waste products and excess fluid 
+                from the body. These waste products and excess fluid are removed through the urine. 
+                The production of urine involves highly complex steps of excretion and re-absorption. 
+                This process is necessary to maintain a stable balance of body chemicals.
+                    </ion-text>
+            </ion-row>
+
+            <ion-row><ion-text class="" style="text-transform: none;font-weight: normal; padding-top: 10px;">
+                The critical regulation of the body's salt, potassium and acid content is performed by the kidneys. 
+                The kidneys also produce hormones that affect the function of other organs. 
+                For example, a hormone produced by the kidneys stimulates red blood cell production. 
+                Other hormones produced by the kidneys help regulate blood pressure and control calcium metabolism.
+                    </ion-text>
+            </ion-row>
+
+            <ion-row><ion-text class="" style="text-transform: none;font-weight: normal; padding-top: 10px;">
+                The kidneys are powerful chemical factories that perform the following functions:
+                    </ion-text>
+            </ion-row>
+
             <ion-grid>
                 <ion-row>
-             
+                <ion-col>
+                    
             <ul>
-                <li>swollen ankles</li>
-                <li>fatigue</li>
-                <li>difficulty concentrating</li>
-                <li>decreased appetite</li>
-                <li>foamy urine</li>
+                <li>remove waste products from the body</li>
+                <li>remove drugs from the body</li>
+                <li>balance the body's fluids</li>
+                <li>release hormones that regulate blood pressure</li>
             </ul>
-                
-                <ion-col size="auto"><img src="/public/ckd/87.png" alt="" width="200" height="150"></ion-col>
+                        
+                </ion-col>
+                <ion-col size="auto"><img src="/public/kidney/101.png" alt="" width="150" height="100"></ion-col>
+                </ion-row>
+            </ion-grid>
+ 
+            <ion-grid>
+                <ion-row>
+                <ion-col>
+                    
+            <ul>
+                <li>release hormones that regulate blood pressure</li>
+                <li>regulate blood pressure produce an active form of vitamin D 
+                    that promotes strong, healthy bones</li>
+                <li>control the production of red blood cells</li>
+            </ul>
+                        
+                </ion-col>
+                <ion-col size="auto"><img src="/public/kidney/102.png" alt="" width="150" height="100"></ion-col>
+                </ion-row>
+            </ion-grid>
+             
+            <ion-row><ion-text class="" style="text-transform: none;font-weight: normal; padding-top: 10px;font-size: x-large;">
+                Where Are the Kidneys and How Do They Function?
+                    </ion-text>
+            </ion-row>
+            <ion-grid>
+                <ion-row>
+                <ion-col>
+                    <ion-text class="" style="text-transform: none;font-weight: normal; padding-top: 10px;">
+                        There are two kidneys, each about the size of a fist, located on either side of the 
+                        spine at the lowest level of the rib cage. 
+                        Each kidney contains up to a million functioning units called nephrons. 
+                        A nephron consists of a filtering unit of tiny blood vessels called a glomerulus attached to a tubule. 
+                        When blood enters the glomerulus, it is filtered and the remaining fluid then passes along the 
+                    </ion-text> 
+                </ion-col>
+                <ion-col size="auto"><img src="/public/kidney/103.png" alt="" width="150" height="200"></ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+                <ion-row>
+                <ion-col>
+                    <ion-text class="" style="text-transform: none;font-weight: normal;">
+                        tubule. In the tubule, chemicals and water are either added to or 
+                        removed from this filtered fluid according to the body's needs, 
+                        the final product being the urine we excrete.
+                    </ion-text> 
+                </ion-col>
+                <ion-col size="auto"><img src="/public/kidney/104.png" alt="" width="100" height="100"></ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-row><ion-text class="" style="text-transform: none;font-weight: normal;font-size: x-large;">
+                Where Are the Kidneys and How Do They Function?
+                    </ion-text>
+            </ion-row>
+            <ion-grid>
+                <ion-row>
+                <ion-col>
+                    <ion-text class="" style="text-transform: none;font-weight: normal;">
+                        Chronic kidney disease is defined as having some type of kidney abnormality, 
+                        or "marker", such as protein in the urine and having decreased 
+                        kidney function for three months or longer.
+
+                    </ion-text> 
+                </ion-col>
+                <ion-col size="auto"><img src="/public/kidney/105.png" alt="" width="100" height="100"></ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-grid>
+                <ion-row>
+                <ion-col>
+                    <ion-text class="" style="text-transform: none;font-weight: normal;">
+                        Chronic kidney disease is defined as having some type of kidney abnormality, 
+                        or "marker", such as protein in the urine and having decreased 
+                        kidney function for three months or longer.
+
+                    </ion-text> 
+                </ion-col>
+                <ion-col size="auto"><img src="/public/kidney/106.png" alt="" width="100" height="100"></ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-grid>
+                <ion-row>
+                <ion-col>
+                    <ion-text class="" style="text-transform: none;font-weight: normal;">
+                        Others are congenital; that is, individuals may be born with an abnormality that can affect their kidneys. 
+                        The following are some of the most common types and causes of kidney damage.
+
+                    </ion-text> 
+                </ion-col>
+                <ion-col size="auto"><img src="/public/kidney/107.png" alt="" width="100" height="100"></ion-col>
                 </ion-row>
             </ion-grid>
             
-            <ion-row>
-                <img src="/public/ckd/88.png" alt="" width="500" height="700">
-            </ion-row>
-
-            <ion-text class="" style="text-transform: none;font-weight: normal; font-size: x-large;margin-top:10px">
-                Can Chronic Kidney Disease affect my health in other ways?  
-            </ion-text>
-            <ion-row>
-                <ion-text class="" style="text-transform: none;font-weight: normal; ">
-                People with chronic kidney disease can develop:
-                <ul>
-                <li>High blood pressure</li>
-                <li>Heart attack and stroke</li>
-                <li>Anemia (low number of red blood cells)</li>
-                <li>Bone disease</li>
-            </ul>
-              </ion-text>
-            </ion-row> 
-            <ion-row>
-                <img src="/public/ckd/89.png" alt="" width="500" height="200">
-            </ion-row>
-            <ion-row>
-                <ion-text class="" style="text-transform: none;font-weight: normal; ">
-                    Controlling blood pressure is very important.
-                <ul>
-                <li>The goal is to keep your blood pressure below 140/80 (usually stated as “140 over 80”).</li>
-                <li>Many people need to take several medicines to get to this blood pressure goal. </li>
-                <li>If you have side effects or want to stop the medicines for any reason, be sure to discuss this with your doctor first.</li>
-                <li>Medicine is just one step to lowering your blood pressure and cholesterol. </li>
-                <li>You should also: Get regular exercise. Talk with your doctor about what is best for you.</li>
-            </ul>
-              </ion-text>
-            </ion-row>
-            <ion-text class="" style="text-transform: none;font-weight: normal; font-size: x-large;margin-top:10px">
-                TAKE ACTION!
-            </ion-text>
-            
             <ion-grid>
                 <ion-row>
-                <ion-col><ion-text class="" style="text-transform: none;font-weight: normal;">
-                    Early detection of kidney disease can help to prevent the progression of the disease. 
-                    This means you are less likely to experience kidney failure and need dialysis or a kidney
-                    transplant to keep you alive.
-                        </ion-text>
+                <ion-col>
+                    <ion-text class="" style="text-transform: none;font-weight: normal;">
+                        Drugs and toxins can also cause kidney problems. Using large numbers of over-the-counter 
+                        pain relievers for a long time may be harmful to the kidneys. Certain other medications, 
+                        toxins, pesticides and "street" drugs such as heroin and crack can also cause kidney damage
+
+                    </ion-text> 
                 </ion-col>
-                <ion-col size="auto"><img src="/public/ckd/90.png" alt="" width="150" height="100"></ion-col>
+                <ion-col size="auto"><img src="/public/kidney/108.png" alt="" width="100" height="100"></ion-col>
                 </ion-row>
             </ion-grid>
-            
             <ion-grid>
                 <ion-row>
-                <ion-col><ion-text class="" style="text-transform: none;font-weight: normal;">
-                    If you have risk factors for kidney disease, it is important that you have a regular 
-                    Kidney Health Check with your General Physician or health service. 
+                <ion-col>
+                    <ion-text class="" style="text-transform: none;font-weight: normal;">
+                        Urinary tract infections occur when germs enter the urinary tract and cause symptoms 
+                        such as pain and/or burning during urination and more frequent need to urinate. 
+                        These infections most often affect the bladder, 
+                        but they sometimes spread to the kidneys, and they may cause fever and pain in your back.
 
-                        </ion-text>
+                    </ion-text> 
                 </ion-col>
-                <ion-col size="auto"><img src="/public/ckd/91.png" alt="" width="150" height="100"></ion-col>
+                <ion-col size="auto"><img src="/public/kidney/109.png" alt="" width="100" height="100"></ion-col>
                 </ion-row>
             </ion-grid>
-           
-            <ion-grid>
-                <ion-row>
-                <ion-col><ion-text class="" style="text-transform: none;font-weight: normal;">
-                    A Kidney Health Check doesn’t take long and can be done by your General Physician. 
-                    It involves simple blood and urine tests together with a blood pressure check.
-
-                        </ion-text>
-                </ion-col>
-                <ion-col size="auto"><img src="/public/ckd/92.png" alt="" width="150" height="100"></ion-col>
-                </ion-row>
-            </ion-grid>
-
-
         </ion-grid>
       </ion-content>
     </ion-page> 

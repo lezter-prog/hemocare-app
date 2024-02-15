@@ -118,6 +118,12 @@
                 <div style=" width: 100%;padding: 1px;text-align: center;">I-check ang Nutrition Facts label sa packaging ng pagkain para sa sodium. Mataas ang content ng asin sa 20% Daily Value nito.</div>
               </div>
             </ion-row>
+
+            <ion-row class="" style="padding: 1rem;">
+              <ion-label style="margin-bottom: 1rem;font-size: x-large;">
+                PART II- DIETARY ADVICE
+              </ion-label>
+            </ion-row>
             
             
 

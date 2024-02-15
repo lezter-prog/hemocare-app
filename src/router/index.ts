@@ -11,6 +11,11 @@ import addNewMedecine from '../views/AddNewMedicine.vue';
 import BlogPost from '../views/BlogPost.vue';
 import Dietary from '../views/DietaryTips.vue';
 import DietAdvice from '../views/DietAdvice.vue';
+import Reminders from '../views/Reminders.vue';
+import Kidneys from '../views/Kidneys.vue';
+import Golden from '../views/Golden.vue';
+import NutritionFacts from '../views/NutritionFacts.vue';
+import DetectChronicKidneyDisease from '../views/DetectChronicKidneyDisease.vue';
 import Admin from '../views/Admin.vue';
 
 
@@ -95,6 +100,31 @@ const routes: Array<RouteRecordRaw> = [
     path: '/hemo/blog/post/diet/advice',
     name: 'dietAdvice',
     component: DietAdvice
+  },
+  {
+    path: '/hemo/blog/post/chronic-disease',
+    name: 'detectchronickidneydisease',
+    component: DetectChronicKidneyDisease
+  },
+  {
+    path: '/hemo/blog/post/about-kidneys',
+    name: 'kidneys',
+    component: Kidneys
+  },
+  {
+    path: '/hemo/blog/post/8-golden-rules',
+    name: 'Golden',
+    component: Golden
+  },
+  {
+    path: '/hemo/blog/post/reminders',
+    name: 'remiders',
+    component: Reminders
+  },
+  {
+    path: '/hemo/blog/post/nutrition-facts',
+    name: 'nutritionFacts',
+    component: NutritionFacts
   },
   {
     path: '/hemo/admin/',

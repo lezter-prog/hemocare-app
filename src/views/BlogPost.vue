@@ -15,25 +15,6 @@
           </ion-fab-button>
         </ion-fab> -->
         <ion-grid style="background-color: white;">
-              <ion-row>
-                  <ion-col>
-                      <img  height="150" width="300"
-                          src="/public/care1.jpeg"
-                      />
-                  </ion-col>
-                  <ion-col>
-                      <img  height="150" width="300"
-                      src="/public/care2.jpg"
-                      />
-                  </ion-col>
-                  <ion-col>
-                      <img  height="150" width="300"
-                      src="/public/care3.webp"/>
-                  </ion-col>
-                </ion-row>
-                
-                 
-
             <ion-row >
               <img src="/public/care3.webp"/>
                 <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
@@ -65,6 +46,83 @@
                 </div>
                </ion-col>
             </ion-row>
+
+            <ion-row >
+              <img src="/public/care3.webp"/>
+                <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
+                <ion-text>
+                        <h1 style="margin-top:5px; font-size: 23px;">HOW TO DETECT CHRONIC KIDNEY DISEASE (CKD)? </h1>
+                </ion-text>
+                <div style="background-color: white; ">
+                    <ion-button fill="clear" router-link="post/chronic-disease" router-direction="forward" >
+                       Read Article
+                        <ion-icon  slot="end" :icon="chevronForward"></ion-icon>
+                   </ion-button>
+                </div>
+               </ion-col>
+            </ion-row>
+
+            <ion-row >
+              <img src="/public/care3.webp"/>
+                <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
+                <ion-text>
+                        <h1 style="margin-top:5px; font-size: 23px;">REMINDERS</h1>
+                </ion-text>
+                <div style="background-color: white; ">
+                    <ion-button fill="clear" router-link="post/reminders" router-direction="forward" >
+                       Read Article
+                        <ion-icon  slot="end" :icon="chevronForward"></ion-icon>
+                   </ion-button>
+                </div>
+               </ion-col>
+            </ion-row>
+
+            <ion-row >
+              <img src="/public/care3.webp"/>
+                <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
+                <ion-text>
+                        <h1 style="margin-top:5px; font-size: 23px;">Did You know that your kidneys</h1>
+                </ion-text>
+                <div style="background-color: white; ">
+                    <ion-button fill="clear" router-link="post/about-kidneys" router-direction="forward" >
+                       Read Article
+                        <ion-icon  slot="end" :icon="chevronForward"></ion-icon>
+                   </ion-button>
+                </div>
+               </ion-col>
+            </ion-row>
+
+            <ion-row >
+              <img src="/public/care3.webp"/>
+                <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
+                <ion-text>
+                        <h1 style="margin-top:5px; font-size: 23px;">8 Golden Rules</h1>
+                </ion-text>
+                <div style="background-color: white; ">
+                    <ion-button fill="clear" router-link="post/8-golden-rules" router-direction="forward" >
+                       Read Article
+                        <ion-icon  slot="end" :icon="chevronForward"></ion-icon>
+                   </ion-button>
+                </div>
+               </ion-col>
+            </ion-row>
+
+            <ion-row >
+              <img src="/public/care3.webp"/>
+                <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
+                <ion-text>
+                        <h1 style="margin-top:5px; font-size: 23px;">How to read nutrition facts</h1>
+                </ion-text>
+                <div style="background-color: white; ">
+                    <ion-button fill="clear" router-link="post/nutrition-facts" router-direction="forward" >
+                       Read Article
+                        <ion-icon  slot="end" :icon="chevronForward"></ion-icon>
+                   </ion-button>
+                </div>
+               </ion-col>
+            </ion-row>
+            
+
           
         </ion-grid>
       </ion-content>

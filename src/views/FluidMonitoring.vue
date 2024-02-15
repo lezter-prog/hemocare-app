@@ -3,7 +3,11 @@
     <ion-header>
       <ion-toolbar color="secondary" style="text-align: center;">
         <ion-title>HELLO!</ion-title>
+        <ion-buttons slot="end">
+          <ion-button @click="logout"> <ion-icon :icon="logOut"></ion-icon> </ion-button>
+        </ion-buttons>
       </ion-toolbar>
+
     </ion-header>
     <ion-content :fullscreen="true">
       <!-- <ion-fab slot="fixed" vertical="center" horizontal="center">
@@ -105,13 +109,16 @@ import { IonPage,
   IonRow,
   IonText,
   IonButton,
-  IonButtons
+  IonButtons,
+  useIonRouter
  } from '@ionic/vue';
  import { create, ellipsisHorizontal, stopwatch, water, listSharp, logOut, star } from 'ionicons/icons';
-import { add } from 'ionicons/icons';
+
 import { useAppWriteAccount } from '../composable/useAppWriteAccount';
 import { ref,onMounted } from 'vue';
 import tiplist from '../composable/TipList.json';
+import { Storage } from '@ionic/storage';
+
   const tips =  ref(tiplist);
   let randomId = Math.floor(Math.random() * tips.value.length) + 1;
 tips.value[randomId-1];
@@ -119,12 +126,14 @@ const tip = ref(tips.value[randomId-1]);
 setInterval(storeTip, 5000);
 
 const { accountSession } =  useAppWriteAccount();
+const store = new Storage();
+const ionRouter = useIonRouter();
 
 
 const initialize = async () => {
+    await store.create();
      
      const response = await accountSession();
-     console.log(response);
   };
 
 function storeTip(){
@@ -133,6 +142,12 @@ function storeTip(){
 }
 
     onMounted(()=>initialize())
+
+    const logout = async ()=>{
+      await store.create();
+      await store.clear();
+      ionRouter.navigate('/login', 'forward', 'replace');
+    }
 </script>
 
 <style>

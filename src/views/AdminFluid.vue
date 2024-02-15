@@ -1,24 +1,41 @@
 <template>
     <ion-page>
       <ion-header>
-        <ion-searchbar show-clear-button="focus" value="Search"></ion-searchbar>
+        <ion-toolbar color="secondary" style="text-align: center;">
+        <ion-title>Fluid</ion-title>
+        <ion-buttons slot="end">
+          <ion-button @click="logout"> <ion-icon :icon="logOut"></ion-icon> </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+        <ion-searchbar show-clear-button="focus" placeholder="Search" value="" @ion-input="searchUser"></ion-searchbar>
      </ion-header>
       <ion-content :fullscreen="true">
-        <!-- <ion-fab slot="fixed" vertical="center" horizontal="center">
-          <ion-fab-button >
-            <ion-icon size="large" :icon="add"></ion-icon>
-          </ion-fab-button>
-        </ion-fab> -->
+        <ion-grid >
+          <ion-row class="ion-align-items-center"> 
+            <ion-col class="ion-text-left">List of User </ion-col>
+            <ion-col class="ion-text-right">
+              <ion-button color="tertiary" size="small" @click="downloadXLS()"> <ion-icon :icon="download"></ion-icon> </ion-button>
+            </ion-col> 
+          </ion-row>
+        </ion-grid>
         <ion-grid>
-       <ion-accordion-group>
-          <ion-accordion value="first">
-            <ion-item slot="header" color="light">
-              <ion-label>Allice Anderson </ion-label>
+          <ion-list >
+            <ion-item v-for="(user,key) in filteredUsers" :value="key" :key="key" >
+              <ion-label>{{ user.name }} </ion-label>
+
+              <ion-button  :router-link="'/hemo/admin/fluid/view?userId='+user.$id+'&name='+user.name" router-direction="forward" >View Fluid</ion-button> 
             </ion-item>
-                <div class="ion-padding" slot="content"> 
+            
+          </ion-list>
+       <!-- <ion-accordion-group :key="accordionKey">
+          <ion-accordion v-for="(user,key) in users" :value="key" :key="key" @click="appendContent">
+            <ion-item  slot="header" color="light">
+              <ion-label>{{ user.name }} </ion-label>
+            </ion-item>
+            <div v-for="(fluid,key2) in user.sevenDaysFluid?.documents" :key="key2" class="ion-padding" slot="content"> 
                 <ion-row>
                 <ion-col>
-                    01
+                    {{ fluid }}
                 </ion-col>
                 <ion-col>
                   700 ml
@@ -30,243 +47,10 @@
                     12/13/2023
                 </ion-col>
                 </ion-row>
-              </div>
-              <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    02
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    Tuesday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
-              <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    03
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    Wednesday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
-              <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    04
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    Thursday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
-              <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    05
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    Friday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
+            </div> 
           </ion-accordion>
-          <ion-accordion value="second">
-            <ion-item slot="header" color="light">
-              <ion-label>Benjamin Brown</ion-label>
-            </ion-item>
-            <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    01
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    MONday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
-              <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    02
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    Tuesday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
-              <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    03
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    Wednesday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
-              <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    04
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    Thursday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
-              <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    05
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    Friday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
-          </ion-accordion>
-          <ion-accordion value="third">
-            <ion-item slot="header" color="light">
-              <ion-label>Chloe Garter</ion-label>
-            </ion-item>
-            <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    01
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    MONday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
-              <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    02
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    Tuesday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
-              <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    03
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    Wednesday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
-              <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    04
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    Thursday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
-              <div class="ion-padding" slot="content"> 
-                <ion-row>
-                <ion-col>
-                    05
-                </ion-col>
-                <ion-col>
-                  700 ml
-                </ion-col>
-                <ion-col>
-                    Friday
-                </ion-col>
-                <ion-col>
-                    12/13/2023
-                </ion-col>
-                </ion-row>
-              </div>
-          </ion-accordion>
-      </ion-accordion-group>
+          
+      </ion-accordion-group> -->
         </ion-grid>
         <!-- <ExploreContainer name="Tab 1 page" /> -->
       </ion-content>
@@ -279,7 +63,6 @@
     IonToolbar, 
     IonTitle, 
     IonContent, 
-    IonFab, 
     IonFabButton, 
     IonIcon,
     IonCol, 
@@ -293,24 +76,100 @@
     IonLabel, 
     IonList,
     IonAccordion,
-    IonAccordionGroup
+    IonAccordionGroup,
+    useIonRouter,
+    loadingController
 
    } from '@ionic/vue';
-   import { create, ellipsisHorizontal, stopwatch, water, listSharp, logOut, star } from 'ionicons/icons';
+   import { create, ellipsisHorizontal, stopwatch, water, listSharp, logOut, star,download } from 'ionicons/icons';
   import { add } from 'ionicons/icons';
   import { useAppWriteAccount } from '../composable/useAppWriteAccount';
-  import { ref,onMounted } from 'vue';
+  import { useAppwiteFluid } from '../composable/useAppWriteFluid';
+  import { XLSWriter } from '../composable/ExcelWritter';
+  import { ref,onMounted,watch } from 'vue';
+  import { Storage } from '@ionic/storage';
   
-  const { accountSession } =  useAppWriteAccount();
+  const { accountSession, getAllUsers } =  useAppWriteAccount();
+  const { getLast7DaysById  } =  useAppwiteFluid();
+  const store = new Storage();
+  const ionRouter = useIonRouter();
+
+  const users = ref([]);
+  const filteredUsers = ref([]);
+  const fluidAdded =  ref(false);
+  const accordionKey =  ref("intial");
   
-  
-  const initialize = async () => {
+  const initialize = async() => {
+      showLoading();
        
-       const response = await accountSession();
-       console.log(response);
-    };
+
+       users.value = await getAllUsers();
+       filteredUsers.value = users.value.filter(data=>data.name !='Admin')
+
+      // filteredUsers.value = await InitializeFluidIntakes();
+  }
+onMounted(async ()=>initialize());
+
+const InitializeFluidIntakes = async()=>{
+  const u = (await getAllUsers()).data.users;
+  return u.forEach(async (user:Object) => {
+    if(user.name != "Admin"){
+      const fluid = await getLast7DaysById(user.$id);
+      user.sevenDaysfluids =fluid.data;
+      return user;
+    }
+  });
   
-      onMounted(()=>initialize())
+  
+};
+
+const showLoading = async () => {
+        const loading = await loadingController.create({
+          message: 'Loading...',
+          duration: 3000,
+        });
+
+        loading.present();
+      };
+
+const searchUser = (e:Event) =>{
+      const value = e.target?.value;
+
+      if(value != ""){
+        filteredUsers.value =  users.value.filter(data =>(data.name).toUpperCase().includes(value.toUpperCase()));
+      }else{
+        filteredUsers.value = users.value.filter(data=>data.name !='Admin');
+      }
+     
+}
+
+const appendContent = (e:Event)=>{
+  console.log(e);
+}
+
+const viewFluid = (id:string,name:string) =>{
+    ionRouter.navigate('/hemo/admin/fluid/view?userId='+id+'&name='+name, 'forward', 'replace');
+}
+
+
+const getFluilds = async (userId:string)=>{
+ 
+     const data = await getLast7DaysById(userId);
+     console.log(data);
+      
+      return data.data;
+}
+
+const downloadXLS =  () =>{
+  XLSWriter();
+}
+
+      
+  const logout = async ()=>{
+      await store.create();
+      await store.clear();
+      ionRouter.navigate('/login', 'forward', 'replace');
+    }
   </script>
   
   <style>

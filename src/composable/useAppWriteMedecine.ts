@@ -209,6 +209,88 @@ export const useAppWriteMedication = ()=>{
 
     }
 
+    const getLast7DaysById = async (id:string)=>{
+       
+        try {
+            var result = {
+                "dates":new Array(),
+                "value":new Array()
+            };
+
+            var dates: Array<String> = [];
+            for (var i=6; i>0; i--) {
+                var d = new Date();
+                d.setDate(d.getDate() - i);
+                var momentDate =  moment(d).format('MM/DD/YYYY');
+                dates.push(momentDate)
+            }
+
+            var newMedecine =  new Array();
+
+            const medecines = await getValueByUser(id);
+            dates.forEach(async (date,key)=>{
+                var obj =  new Object();
+                obj.date =date; 
+                var arr = new Array();
+                medecines.filter(data =>dates.includes(data.date_entry));
+                medecines.forEach(async m =>{
+                    if(date == m.date_taken){
+                       const med = await getValueById(m.medication_id);
+                       console.log(med);
+                        arr.push(med.name);
+                    }
+                   
+                })
+                obj.medecine = arr;
+                newMedecine.push(obj);
+
+                if(key == (dates.length-1)){
+                    
+                }
+            })
+
+            
+            
+            console.log(newMedecine);
+           
+            return {newMedecine, error:undefined};
+            
+        } catch (error) {
+            return {error, data:undefined}
+        }
+    }
+
+    const getValueByUser = async (id:string)=>{
+        try {
+            
+            const header = await database.value?.listDocuments(
+                CONFIG.DATABASE_ID,
+                userTakenMedicationCollection.value,
+                [
+                     query.equal('user_id',id),
+                ]
+            ); 
+            return header?.documents;
+        } catch (error) {
+            return {error, data:undefined}
+        }
+    }
+
+    const getValueById = async (id:string)=>{
+        try {
+            
+            const header = await database.value?.getDocument(
+                CONFIG.DATABASE_ID,
+                userMedicationCollection.value,
+                id
+            ); 
+            console.log(header)
+            return header;
+        } catch (error) {
+            return {error, data:undefined}
+        }
+    }
+
 
     return {
         inputMedication,
@@ -217,7 +299,9 @@ export const useAppWriteMedication = ()=>{
         takeMedecine,
         checkBeforeTake,
         check,
-        deleteMedecine
+        deleteMedecine,
+        getValueByUser,
+        getLast7DaysById
     }
 }
 

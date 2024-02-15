@@ -121,6 +121,7 @@ export const useAppwiteFluid = ()=>{
     const getLast7Days = async ()=>{
        
         try {
+            const accountId = (await account.value?.get())?.$id;
             var result = {
                 "dates":new Array(),
                 "value":new Array()
@@ -132,7 +133,7 @@ export const useAppwiteFluid = ()=>{
                 d.setDate(d.getDate() - i);
                 var momentDate =  moment(d).format('MMM-DD-YYY');
                 result.dates.push(momentDate)
-                const header= await getValueByDate(d);
+                const header= await getValueByDate(d,accountId??'');
                 result.value.push(header.data?.documents[0]?.total_fluid_taken_ml);
             }
             console.log(result);
@@ -143,15 +144,76 @@ export const useAppwiteFluid = ()=>{
         }
     }
 
-     const getValueByDate = async (date:Date)=>{
+    const getLast7DaysById = async (id:string)=>{
+       
+        try {
+            var result = {
+                "dates":new Array(),
+                "value":new Array()
+            };
+            for (var i=6; i>0; i--) {
+                var d = new Date();
+                d.setDate(d.getDate() - i);
+                var momentDate =  moment(d).format('MMM-DD-YYY');
+                result.dates.push(momentDate)
+                const header= await getValueByDate(d,id);
+                const value =header.data?.documents.findLast(last=>last);
+                if(value != undefined){
+                    result.value.push(value);
+                }
+            }
+           
+            return {data:result.value, error:undefined};
+            
+        } catch (error) {
+            return {error, data:undefined}
+        }
+    }
+
+     const getValueByDate = async (date:Date,id:string)=>{
+        try {
+            
+            const header = await database.value?.listDocuments(
+                CONFIG.DATABASE_ID,
+                monitorFluidHeaderCollection.value,
+                [
+                     query.equal('date_entry',moment(date).format('MM-DD-YYYY')),
+                     
+                     query.equal('id_user',id),
+
+                ]
+            ); 
+            return {data:header, error:undefined};
+        } catch (error) {
+            return {error, data:undefined}
+        }
+    }
+
+    const getValueByUser = async (id:string)=>{
+        try {
+            
+            const header = await database.value?.listDocuments(
+                CONFIG.DATABASE_ID,
+                monitorFluidHeaderCollection.value,
+                [
+                     query.equal('id_user',id),
+
+                ]
+            ); 
+            return header?.documents;
+        } catch (error) {
+            return {error, data:undefined}
+        }
+    }
+    
+    const getFluidsByUser= async (user:string)=>{
         try {
             const accountId = (await account.value?.get())?.$id;
             const header = await database.value?.listDocuments(
                 CONFIG.DATABASE_ID,
                 monitorFluidHeaderCollection.value,
                 [
-                     query.equal('date_entry',moment(date).format('MM-DD-YYYY')),
-                     query.equal('id_user',accountId??""),
+                     query.equal('id_user',user),
 
                 ]
             ); 
@@ -166,7 +228,9 @@ export const useAppwiteFluid = ()=>{
         reduceFluid,
         checkTodaysEntry,
         getLast7Days,
-        getValueByDate
+        getLast7DaysById,
+        getValueByDate,
+        getValueByUser
     }
 }
 

@@ -93,8 +93,13 @@
           if(response?.error) throw response.error;
           store.set('email',emailRef.value.$el.value);
           store.set('password',passwordRef.value.$el.value);
+          if(emailRef.value.$el.value == 'admin@hemocare.com' && passwordRef.value.$el.value == 'HemoCare123'){
+            ionRouter.navigate('/hemo/admin', 'forward', 'replace');
+          }else{
+            ionRouter.navigate('/hemo/', 'forward', 'replace');
 
-          ionRouter.navigate('/hemo/', 'forward', 'replace');
+          }
+
 
         }catch (error) {
           const alert = await alertController.create({

@@ -98,20 +98,30 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/hemo/admin/',
-    name: 'admin',
     component: AdminTabs,
     children:[
       {
         path: '',
         redirect: 'hemo/admin/fluid'
       },
+      
       {
         path: 'fluid',
+        name: 'adminFluids',
         component: () => import('@/views/AdminFluid.vue')
+      },
+      {
+        path: 'fluid/view',
+        name: 'adminFluidsView',
+        component: () => import('@/views/AdminFluidView.vue')
       },
       {
         path: 'medication',
         component: () => import('@/views/AdminMedication.vue')
+      },
+      {
+        path: 'medication/view',
+        component: () => import('@/views/AdminMedicationView.vue')
       },
       {
         path: 'schedule',

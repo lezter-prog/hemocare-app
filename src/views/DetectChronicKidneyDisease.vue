@@ -46,7 +46,7 @@
             <ion-text class="" style="text-transform: none;font-weight: normal; font-size: x-large;">
                 Signs of advancing CKD include: 
                         </ion-text>
-            <ion-grid>
+            <ion-grid style="text-align:left ;">
                 <ion-row>
              
             <ul>
@@ -57,7 +57,7 @@
                 <li>foamy urine</li>
             </ul>
                 
-                <ion-col size="auto"><img src="/public/ckd/87.png" alt="" width="200" height="150"></ion-col>
+                <ion-col size="auto"><img src="/public/ckd/87.png" alt="" width="150" height="150"></ion-col>
                 </ion-row>
             </ion-grid>
             
@@ -65,7 +65,7 @@
                 <img src="/public/ckd/88.png" alt="" width="500" height="700">
             </ion-row>
 
-            <ion-text class="" style="text-transform: none;font-weight: normal; font-size: x-large;margin-top:10px">
+            <ion-text class="" style="text-transform: none;font-weight: normal; font-size: x-large;margin-top:10px; text-align: left;">
                 Can Chronic Kidney Disease affect my health in other ways?  
             </ion-text>
             <ion-row>
@@ -83,7 +83,7 @@
                 <img src="/public/ckd/89.png" alt="" width="500" height="200">
             </ion-row>
             <ion-row>
-                <ion-text class="" style="text-transform: none;font-weight: normal; ">
+                <ion-text class="" style="text-transform: none;font-weight: normal; text-align: left ">
                     Controlling blood pressure is very important.
                 <ul>
                 <li>The goal is to keep your blood pressure below 140/80 (usually stated as “140 over 80”).</li>

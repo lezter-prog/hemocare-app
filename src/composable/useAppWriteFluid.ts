@@ -178,7 +178,6 @@ export const useAppwiteFluid = ()=>{
                 monitorFluidHeaderCollection.value,
                 [
                      query.equal('date_entry',moment(date).format('MM-DD-YYYY')),
-                     
                      query.equal('id_user',id),
 
                 ]

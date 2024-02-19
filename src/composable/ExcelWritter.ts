@@ -1,6 +1,9 @@
-import XLSX from 'xlsx';
+import { utils,write } from 'xlsx';
 import moment from 'moment';
 import {useAppwiteFluid} from './useAppWriteFluid';
+import { FileOpener, FileOpenerOptions } from '@capacitor-community/file-opener'
+import write_blob from 'capacitor-blob-writer'
+import { Directory, Filesystem } from '@capacitor/filesystem'
 
 /* load 'fs' for readFile and writeFile support */
 // import * as fs from 'fs';
@@ -16,6 +19,8 @@ import {useAppwiteFluid} from './useAppWriteFluid';
 const {getValueByDate, getValueByUser} = useAppwiteFluid();
 
 export const XLSWriter = async () => {
+
+    const downloadingUrls: any[] = []
 
     const promise = await fetch("https://cloud.appwrite.io/v1/users",{
         headers:{
@@ -72,10 +77,9 @@ export const XLSWriter = async () => {
                 var json = JSON.parse(JSON.stringify(arrangedData));
                 console.log(json);
                 console.log("youre at last")
-                const worksheet = XLSX.utils.json_to_sheet(json);
-    
-                    const workbook = XLSX.utils.book_new();
-                    XLSX.utils.book_append_sheet(workbook, worksheet, "users");
+                const ws = utils.json_to_sheet(todos.value);
+                const wb = utils.book_new();
+                utils.book_append_sheet(wb, ws, "SheetJSQuasar");
     
     
                 
@@ -83,12 +87,15 @@ export const XLSWriter = async () => {
                 
     
                     /* fix headers */
-                    XLSX.utils.sheet_add_aoa(worksheet, [header], { origin: "A1" });
+                    utils.sheet_add_aoa(ws, [header], { origin: "A1" });
     
                     /* calculate column width */
                     // worksheet["!cols"] = [ { wch: } ];
+                    const ab: ArrayBuffer = write(wb, { bookType: "xlsx", type: "array"});
+                    let blob = new Blob([ab], {type: 'application/octet-stream'});
+                    _saveBlobFile(blob,"UsersFluidIntake_"+moment(new Date()).format('MMDDYYYY')+".xlsx")
     
-                    XLSX.writeFile(workbook, "UsersFluidIntake_"+moment(new Date()).format('MMDDYYYY')+".xlsx", { compression: true });
+                    // utils.writeFile(workbook, "UsersFluidIntake_"+moment(new Date()).format('MMDDYYYY')+".xlsx", { compression: true });
     
             }, 3000)
             
@@ -97,8 +104,49 @@ export const XLSWriter = async () => {
         
     })
 
+    const  _downloadAndOpenFiles = async(url: string)=> {
+        if (Capacitor.isNativePlatform()) {
+            Filesystem.downloadFile({
+              path: this.attachment.attachmentName,
+              url: url,
+              directory: Directory.Documents,
+            }).then((res: DownloadFileResult) => {
+              this._openFileWithType(res.path, this.attachment.attachmentType);
+            });
+          } else {
+            Browser.open({ url: url });
+          }
+       }
+     
+
+    const _getFilePath = async(fileName: string, blob: Blob) => {
+        const name = fileName
     
-    
-    
+        try {
+          // 5. Save the file locally
+          return await _saveBlobFile(blob, name)
+        } catch {
+          // 6. In case the file did already exists -> we retrieve it
+          await Filesystem.getUri({
+            path: name,
+            directory: Directory.Cache,
+          })
+            .then((savedFile) => {
+              return savedFile.uri
+            })
+            .catch((error) => {
+              console.error(error)
+              throw new Error('Cannot save/open the file')
+            })
+        }
+      }
+
+    const _saveBlobFile = async (blob: Blob, fileName: string)=> {
+        return write_blob({
+          path: fileName,
+          directory: Directory.Cache,
+          blob: blob,
+        })
+      }
     
 }

@@ -24,9 +24,9 @@
             </ion-row> 
             <ion-row>
                 <ion-col >
-                    <iframe width="390" height="325"
-                           src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1">
-                    </iframe>
+                  <ion-row>
+                <img src="/public/dietary/57.png" alt="">
+            </ion-row>
 
 
                 

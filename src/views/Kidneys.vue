@@ -44,7 +44,7 @@
                     </ion-text>
             </ion-row>
 
-            <ion-grid>
+            <ion-grid style=" text-align: left">
                 <ion-row>
                 <ion-col>
                     
@@ -60,7 +60,7 @@
                 </ion-row>
             </ion-grid>
  
-            <ion-grid>
+            <ion-grid style=" text-align: left">
                 <ion-row>
                 <ion-col>
                     

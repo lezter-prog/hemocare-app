@@ -22,7 +22,7 @@
 
             <ion-grid>
                 <ion-row>
-             <ion-col>
+             <ion-col style="text-align: left;">
             <ul>
                 <li>Drink enough water and fluids to urinate at least 2 to 2.5 liters daily</li>
                 <li>Low Purine Diet 
@@ -44,7 +44,7 @@
            
             <ion-grid>
                 <ion-row>
-                <ion-col><ion-text class="" style="text-transform: none;font-weight: normal;">
+                <ion-col style="text-align: left;"><ion-text class="" style="text-transform: none;font-weight: normal;">
                     <ul>
                         <li><span style="color: red;">DO NOT </span>go on a low calcium diet. Enough calcium is needed in the intestines to bind any oxalate ingested</li>
 
@@ -57,7 +57,7 @@
             
             <ion-grid>
                 <ion-row>
-                <ion-col><ion-text class="" style="text-transform: none;font-weight: normal;">
+                <ion-col style="text-align: left;"><ion-text class="" style="text-transform: none;font-weight: normal;">
                     <ul>
                         <li> Stone formers should not take vitamin C supplements, as it would be an oxalate source of Calcium Oxalate (CaOx) stone formation</li>
 
@@ -70,7 +70,7 @@
 
             <ion-grid>
                 <ion-row>
-                <ion-col><ion-text class="" style="text-transform: none;font-weight: normal;">
+                <ion-col style="text-align: left;"><ion-text class="" style="text-transform: none;font-weight: normal;">
                     <ul>
                         <li>Increase citrus fruits like calamansi or lemon in diet.</li>
 
@@ -83,7 +83,7 @@
 
             <ion-grid>
                 <ion-row>
-                <ion-col><ion-text class="" style="text-transform: none;font-weight: normal;">
+                <ion-col style="text-align: left;"><ion-text class="" style="text-transform: none;font-weight: normal;">
                     <ul>
                         <li>Low salt diet: limit salt intake to less than 1 teaspoon per day</li>
 
@@ -95,7 +95,7 @@
             </ion-grid>
             <ion-grid>
                 <ion-row>
-                <ion-col><ion-text class="" style="text-transform: none;font-weight: normal;">
+                <ion-col style="text-align: left;"><ion-text class="" style="text-transform: none;font-weight: normal;">
                     <ul>
                         <li>Consult your doctor for proper medication and monitoring</li>
 

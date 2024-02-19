@@ -17,7 +17,7 @@
         <ion-grid style="background-color: white;">
             
             <ion-row>
-                <img src="/public/dietadvice.png" alt="">
+                <img src="/public/dietary/61.png" alt="">
             </ion-row> 
             <ion-row class="" style="padding: 1rem;">
             
@@ -31,10 +31,18 @@
 </li>
               </ul>
 
-              <ion-text class="" style="text-transform: none;font-weight: normal;">
-               Given the altered functioning of your kidneys, which now struggle to efficiently eliminate waste products and excess fluids from your bloodstream, your dietary choices become a critical aspect of your treatment. Consequently, adjustments like fluid restriction and modifications in certain food consumption are imperative. The kidney dietitian at your dialysis center will assist you in devising a dietary plan tailored to your specific requirements.
+              <ion-grid>
+                <ion-row>
+                <ion-col size="auto"><img src="/public/dietary/62.png" alt="" width="100" height="150"></ion-col>
+                <ion-col><ion-text class="" style="text-transform: none;font-weight: normal;">
+                  Given the altered functioning of your kidneys, which now struggle to efficiently eliminate waste products and excess fluids from your bloodstream, your dietary choices become a critical aspect of your treatment. Consequently, adjustments like fluid restriction and modifications in certain food consumption are imperative. The kidney dietitian at your dialysis 
+                  center will assist you in devising a dietary plan tailored to your specific requirements.
+                        </ion-text>
+                </ion-col>
+                
+                </ion-row>
+            </ion-grid>
 
-              </ion-text>
               <br>
               <ion-text class="" style="text-transform: none;font-weight: normal;">
                 In the interim, use this blogs as a reference until your dietitian formulates a personalized meal plan. Key recommendations includes:
@@ -57,78 +65,393 @@
             <ion-text class="" style="text-transform: none;font-weight: normal;">
 For hemodialysis patients, managing salt (sodium) intake is crucial to maintaining overall health and well-being. Here are some dietary recommendations:
             </ion-text>
-            <ul>
+            <ul style="text-align:left ;">
               <li>adhering to a suitable diet</li>
               <li>following the prescribed hemodialysis treatments</li>
-              <li>taking the medications as directed by our healthcare professional.
-</li>
+              <li>taking the medications as directed by our healthcare professional.</li>
             </ul>
-
-            <ion-label style="margin-bottom: 1rem;font-size: x-large;">
+          </ion-row>
+          
+          <ion-label style="margin-bottom: 1rem;font-size: large;">
               Limit High-Sodium Foods
+          </ion-label>
 
-              </ion-label>
+          <ion-grid style="margin-top: -25px;"  >
+                <ion-row>
+               
+                <ion-col style="text-align:left ;"><ion-text class="" style="text-transform: none;font-weight: normal;">
+                <ul>
+                 <li>Avoid processed and packaged foods, as they often contain high levels of sodium.</li>
+               </ul>
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/64.png" alt="" width="75" height="75"></ion-col>
+                </ion-row>
+            </ion-grid>
+            
+            <ion-grid style="margin-top:-25px ;">
+                <ion-row>
+               
+                <ion-col style="text-align:left ;"><ion-text class="" style="text-transform: none;font-weight: normal;">
+                <ul>
+                 <li>Stay away from canned soups, sauces, and ready-to-eat meals, as they are typically 
+                  high in sodium.</li>
+               </ul>
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/65.png" alt="" width="75" height="75"></ion-col>
+                </ion-row>
+            </ion-grid>
 
-            <ul>
-              <li>Avoid processed and packaged foods, as they often contain high levels of sodium.</li>
-              <li>Stay away from canned soups, sauces, and ready-to-eat meals, as they are typically high in sodium.</li>
-              <li>Processed meats, such as bacon, sausage, and deli meats, should be minimized due to their sodium content.
-</li>
-            </ul>
-            <ion-label style="margin-bottom: 1rem;font-size: x-large;">
+            <ion-grid style="margin-top:-25px ;">
+                <ion-row>
+               
+                <ion-col style="text-align:left ;"><ion-text class="" style="text-transform: none;font-weight: normal;">
+                <ul>
+                 <li>Processed meats, such as bacon, sausage, and deli meats, should be minimized due to their 
+                     sodium content. </li>
+               </ul>
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/66.png" alt="" width="75" height="75"></ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-label style="margin-bottom: 1rem;font-size: large;">
               Read Food Labels
-              </ion-label>
+            </ion-label>
 
-            <ul>
-              <li>Pay close attention to food labels, and choose products labeled as low-sodium or sodium-free.</li>
-              
-            </ul>
-            <ion-label style="margin-bottom: 1rem;font-size: x-large;">
+             <ion-grid style="margin-top:-25px ;">
+                <ion-row>
+               
+                <ion-col style="text-align:left ;"><ion-text class="" style="text-transform: none;font-weight: normal;">
+                <ul>
+                 <li>Pay close attention to food labels, and choose products labeled as low-sodium or sodium-free. </li>
+               </ul>
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/67.png" alt="" width="75" height="75"></ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-label style="margin-bottom: 1rem;font-size: large;">
               Use Herbs and Spices
+            </ion-label>
 
-              </ion-label>
+             <ion-grid style="margin-top:-25px ;">
+                <ion-row>
+               
+                <ion-col style="text-align:left ;"><ion-text class="" style="text-transform: none;font-weight: normal;">
+                <ul>
+                 <li>Pay close attention to food labels, and choose products labeled as low-sodium or sodium-free.</li>
+               </ul>
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/68.png" alt="" width="75" height="75"></ion-col>
+                </ion-row>
+            </ion-grid>
 
-            <ul>
-              <li>Enhance the flavor of your meals with herbs, spices, and other low-sodium seasonings instead of relying on salt.</li>
-              <li>Experiment with fresh herbs, garlic, onion, lemon juice, and vinegar to add variety to your dishes.</li>
-              
-            </ul>
-            <ion-label style="margin-bottom: 1rem;font-size: x-large;">
+            <ion-grid style="margin-top:-25px ;">
+                <ion-row>
+               
+                <ion-col style="text-align:left ;"><ion-text class="" style="text-transform: none;font-weight: normal;">
+                <ul>
+                 <li>Experiment with fresh herbs, garlic, onion, lemon juice, and vinegar to add variety to your dishes.
+.</li>
+               </ul>
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/69.png" alt="" width="75" height="75"></ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-label style="margin-bottom: 1rem;font-size: large;">
               Choose Fresh Foods
-              </ion-label>
+            </ion-label>
+            <ion-grid style="margin-top:-25px ;">
+                <ion-row>
+               
+                <ion-col style="text-align:left ;"><ion-text class="" style="text-transform: none;font-weight: normal;">
+                <ul>
+                 <li>Opt for fresh fruits and vegetables, as they are naturally low in sodium.</li>
+               </ul>
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/70.png" alt="" width="75" height="75"></ion-col>
+                </ion-row>
+            </ion-grid>
 
-            <ul>
-              <li> Opt for fresh fruits and vegetables, as they are naturally low in sodium.</li>
-              <li>When using canned vegetables or legumes, choose low-sodium or no-salt-added varieties, and rinse them thoroughly before consumption.</li>
-            </ul>
-            <ion-label style="margin-bottom: 1rem;font-size: x-large;">
+            <ion-label style="margin-bottom: 1rem;font-size: large;">
               Limit High-Sodium Condiments
-              </ion-label>
 
-            <ul>
-              <li> Be cautious with condiments like soy sauce, ketchup, and mustard, as they can contribute to increased sodium intake.</li>
-              <li>Consider using low-sodium alternatives or using them sparingly.</li>
-            </ul>
-            <ion-label style="margin-bottom: 1rem;font-size: x-large;">
+            </ion-label>
+
+            <ion-grid style="margin-top:-25px ;">
+                <ion-row>
+               
+                <ion-col style="text-align:left ;"><ion-text class="" style="text-transform: none;font-weight: normal;">
+                <ul>
+                 <li>Be cautious with condiments like soy sauce, ketchup, and mustard, 
+                  as they can contribute to increased sodium intake.</li>
+                  <li>Consider using low-sodium alternatives or using them sparingly.</li>
+               </ul>
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/71.png" alt="" width="75" height="75"></ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-label style="margin-bottom: 1rem;font-size: large;">
               Meat/Protein
+            </ion-label>
+
+            <ion-grid style="margin-top: ;">
+                <ion-row>
+                <ion-col><ion-text class="" style="text-transform: none;font-weight: normal;">
+                  Individuals undergoing dialysis should increase their protein intake. Consuming sufficient 
+                  protein is beneficial for maintaining healthy blood protein levels and enhancing overall
+                   well-being. Protein plays a vital role in preserving muscle strength, accelerating wound 
+                   healing, fortifying the immune system, and promoting overall health. Aim to include a 
+                   high-protein source such as meat, fish, poultry, fresh pork, or eggs in every meal, 
+                   totaling around 8-10 ounces of high-protein foods daily.
+
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/72.png" alt="" width="100" height="230"></ion-col>
+                </ion-row>
+            </ion-grid>
+            
+            <ion-row style="margin-top: 5px;">
+              <ion-label style="margin-bottom: 1rem;font-size: large; margin-top: -50px;">
+              To provide a visual reference:
+            </ion-label>
+             </ion-row>
+            
+               <ion-row ><img src="/public/dietary/73.png" alt="" ></ion-row>
+
+               <ion-grid style="margin-top: ;">
+                <ion-row>
+                  <ion-text class="" style="text-transform: none;font-weight: normal;">
+                    - 3 ounces equals the size of a deck of cards, a medium pork chop, a ¼ pound 
+                    hamburger patty, half a chicken breast, or a medium fish fillet.
+                    - 1 ounce is equivalent to 1 egg or ¼-cup egg substitute, ¼-cup tuna, 
+                    ¼-cup ricotta cheese, one slice of low-sodium lunchmeat, one tablespoon 
+                    of peanut butter, or half an ounce of nuts or seeds.
+                    <br>  <br>
+                    It's important to note that while peanut butter, nuts, seeds, dried beans, 
+                    peas, and lentils contain protein, they are generally restricted due to their 
+                    selevated levels of both potassium and phosphorus. 
+                  </ion-text>
+               </ion-row>
+            </ion-grid>
+          
+            <ion-row>
+                <img src="/public/dietary/74.png" alt="">
+            </ion-row>    
+            <ion-grid style="text-align:left ;">
+                <ion-row>
+                  <ion-text class="" style="text-transform: none;font-weight: normal;">
+                    Unless there's a need to restrict calorie consumption for weight management or control 
+                    carbohydrate intake for blood sugar regulation, you are free to consume as desired from 
+                    the grains, cereals, and breads food group. These foods are rich in calories, and most 
+                    individuals typically require 6 to 11 servings from this group daily.
+                     <br><br>
+                    To manage phosphorus intake, it is advisable to avoid "whole grain" and "high fiber" 
+                    options such as whole wheat bread, bran cereal, and brown rice. Additionally, 
+                    by moderating the intake of dairy-based products, you contribute to the protection
+                    of your bones and blood vessels.
+                  </ion-text>
+               </ion-row>
+            </ion-grid>
+
+             <ion-row style="margin-top: 5px;">
+              <ion-label style="margin-bottom: 1rem;font-size: large; ">
+                Milk/Yogurt/Cheese
 
               </ion-label>
-              <ion-text style="text-transform: none;font-weight: normal;">
-                Individuals undergoing dialysis should increase their protein intake. Consuming sufficient protein is beneficial for maintaining healthy blood protein levels and enhancing overall well-being. Protein plays a vital role in preserving muscle strength, accelerating wound healing, fortifying the immune system, and promoting overall health. Aim to include a high-protein source such as meat, fish, poultry, fresh pork, or eggs in every meal, totaling around 8-10 ounces of high-protein foods daily.
-              </ion-text>
-          </ion-row>
-          <ion-row style="padding: 1rem;">
-            <img src="/public/meat.jpg" alt="">
-            <ion-text style="text-transform: none;font-weight: normal;">
+             </ion-row>
+             <ion-grid style="margin-top: ;">
+                <ion-row>
+                <ion-col style="text-align:left ;"><ion-text class="" style="text-transform: none;font-weight: normal;">
+                  Restrict your consumption of milk, yogurt, and cheese to ½ cup of milk, ½ cup of yogurt, or 1 ounce
+                   of cheese daily. The majority of dairy products have elevated phosphorus levels.
+                   It's important to note that the phosphorus content remains consistent across all varieties of milk – whether skim, low fat, or whole!
 
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/75.png" alt="" width="100" height="100"></ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-row>
+                <img src="/public/dietary/76.png" alt="">
+            </ion-row>
+            <ion-grid style="margin-top: ;">
+                <ion-row>
+                  <ion-text class="" style="text-transform: none;font-weight: normal;">
+                   
+                    Every fruit contains potassium, but specific fruits have higher potassium 
+                    levels and should be restricted or completely avoided to safeguard your heart. 
+                  </ion-text>
+               </ion-row>
+            </ion-grid>
+            
+            <ion-grid style="margin-top: ;">
+                <ion-row>
+                <ion-col style="text-align:left ;"><ion-text class="" style="text-transform: none;font-weight: normal; text-align:left">
+                  Choose: <br>
+                    Apple (1)<br>
+                    Berries (½ cup)<br>
+                    Cherries (10)<br>
+                    Fruit cocktail, drained (½ cup)<br>
+                    Grapes (15)<br>
+                    Peach (1 small fresh or canned, drained)<br>
+                    Pear, fresh or canned, drained (1 halve)<br>
+                    Pineapple (½ cup canned, drained)<br>
+                    Plums (1-2)<br>
+                    Tangerine (1)<br> 
+                    Watermelon (1 small wedge)<br>
 
-              To provide a visual reference:
-- 3 ounces equals the size of a deck of cards, a medium pork chop, a ¼ pound hamburger patty, half a chicken breast, or a medium fish fillet.
-- 1 ounce is equivalent to 1 egg or ¼-cup egg substitute, ¼-cup tuna, ¼-cup ricotta cheese, one slice of low-sodium lunchmeat, one tablespoon of peanut butter, or half an ounce of nuts or seeds.
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/77.png" alt="" width="100" height="250" ></ion-col>
+                </ion-row>
+            </ion-grid>
+              <ion-row style="margin-top: 5px;">
+                <ion-label style="margin-bottom: 1rem;font-size: large; ">
+                  Limit/Avoid:
+                </ion-label>
+              </ion-row>
+              <ion-grid style="margin-top: ;">
+                <ion-row>
+                <ion-col style="text-align:left ;"><ion-text class="" style="text-transform: none;font-weight: normal; text-align:left">
+                      Oranges and orange juice <br>
+                      Kiwis<br>
+                      Nectarines<br>
+                      Prunes and prune juice<br>
+                      Raisins and dried fruit<br>
+                      Bananas<br>
+                      Melons (cantaloupe and honeydew)<br>
 
-It's important to note that while peanut butter, nuts, seeds, dried beans, peas, and lentils contain protein, they are generally restricted due to their elevated levels of both potassium and phosphorus.              </ion-text>
-          </ion-row>
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/78.png" alt="" width="100" height="150" ></ion-col>
+                </ion-row>
+            </ion-grid>
 
+            <ion-grid >
+                <ion-row >
+                <ion-col style="text-align:left ;" ><ion-text class="" style="text-transform: none;font-weight: normal; text-align:left">
+                  Drinks: <br>
+                     
+                     <ul>
+                     <li>Apple cider</li>
+                       <li>Cranberry juice cocktail</li>
+                       <li>Grape juice</li>
+                       <li>Lemonade </li>
+                     
+                     </ul> 
+
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/79.png" alt="" width="100" height="150" ></ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-grid style="margin-top: ;">
+                <ion-row>
+                <ion-col style="text-align:left ;"><ion-text class="" style="text-transform: none;font-weight: normal; text-align:left">
+                  It is crucial to always avoid star fruit (carambola). Instead, focus on consuming 2-3 servings of
+                   low-potassium fruits daily. A serving is defined as ½ cup, 1 small fruit, or 4
+                   ounces of juice. This approach helps manage your potassium intake and supports heart health.
+
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/80.png" alt="" width="100" height="120" ></ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-row style="margin-top: 5px;">
+                <ion-label style="margin-bottom: 1rem;font-size: large; ">
+                  Dessert
+                </ion-label>
+              </ion-row>
+
+              <ion-grid style="margin-top: ;">
+                <ion-row>
+                <ion-col style="text-align:left ;"><ion-text class="" style="text-transform: none;font-weight: normal; text-align:left">
+                  Depending on your calorie needs, your dietitian may recommend high-calorie deserts. 
+                  Pies, cookies, sherbet, and cakes are good choices (but limit dairy-based desserts
+                   and those made with chocolate, nuts, and bananas). If you have diabetes, discuss 
+                   low carbohydrate dessert choices with your dietitian.
+
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/81.png" alt="" width="100" height="120" ></ion-col>
+                </ion-row>
+            </ion-grid>
+             
+            <ion-row style="margin-top: 5px;">
+                <ion-label style="margin-bottom: 1rem;font-size: large; ">
+                  Vegetables/Salads
+                </ion-label>
+              </ion-row>
+
+              <ion-grid >
+                <ion-row >
+                <ion-col style="text-align:left ;" ><ion-text class="" style="text-transform: none;font-weight: normal; text-align:left">
+                  Choose: <br>
+                     
+                     <ul>
+                     <li>Broccoli (raw or cooked from frozen)</li>
+                       <li>Cabbage</li>
+                       <li>Carrots</li>
+                       <li>Cauliflower</li>
+                       <li>Celery</li>
+                       <li>Cucumber</li>
+                       <li>Eggplant</li>
+                       <li>  Garlic</li>
+                       <li>Green and Wax beans (“string beans”)</li>
+                       <li>Lettuce-all types (1 cup)</li>
+                       <li>Onion</li>
+                       <li> Peppers-all types and colors</li>
+                       <li> Radishes</li>
+                       <li> Watercress</li>
+                       <li> Zucchini and Yellow squash</li>
+                     </ul> 
+
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/82.png" alt="" width="100" height="150" ></ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-grid >
+                <ion-row >
+                <ion-col style="text-align:left ;" ><ion-text class="" style="text-transform: none;font-weight: normal; text-align:left">
+                  Limit or avoid: <br>
+                     
+                     <ul>
+                     <li>Potatoes (including French Fries, potato chips and sweet potatoes)</li>
+                       <li>Tomatoes and tomato sauce</li>
+                       <li>Winter squash</li>
+                       <li>Pumpkin</li>
+                       <li>Asparagus (cooked)</li>
+                       <li>Avocado</li>
+                       <li>Beets</li>
+                       <li>  Beet greens</li>
+                       <li>Cooked spinach</li>
+                       <li>Parsnips and rutabaga</li>
+                     </ul> 
+
+                        </ion-text>
+                </ion-col>
+                <ion-col size="auto"><img src="/public/dietary/83.png" alt="" width="100" height="150" ></ion-col>
+                </ion-row>
+            </ion-grid>
+
+            
+           
+
+            
         </ion-grid>
       </ion-content>
     </ion-page> 

@@ -16,7 +16,9 @@
         </ion-fab> -->
         <ion-grid style="background-color: white;">
             <ion-row >
-              <img src="/public/care3.webp"/>
+              <ion-row>
+                <img src="/public/dietary/57.png" alt="">
+             </ion-row> 
                 <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
                 <ion-text>
                         <h1 style="margin-top:5px; font-size: 23px;">CREATE YOUR DIET PLAN</h1>
@@ -48,7 +50,9 @@
             </ion-row>
 
             <ion-row >
-              <img src="/public/care3.webp"/>
+              <ion-row>
+                <img src="/public/ckd/84.png" alt="">
+             </ion-row>
                 <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
                 <ion-text>
                         <h1 style="margin-top:5px; font-size: 23px;">HOW TO DETECT CHRONIC KIDNEY DISEASE (CKD)? </h1>
@@ -63,7 +67,9 @@
             </ion-row>
 
             <ion-row >
-              <img src="/public/care3.webp"/>
+              <ion-row>
+                <img src="/public/reminders/93.png" alt="" style="height:300px; width:500px;">
+             </ion-row>
                 <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
                 <ion-text>
                         <h1 style="margin-top:5px; font-size: 23px;">REMINDERS</h1>
@@ -78,7 +84,9 @@
             </ion-row>
 
             <ion-row >
-              <img src="/public/care3.webp"/>
+              <ion-row>
+                <img src="/public/kidney/100.png" alt="">
+             </ion-row>
                 <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
                 <ion-text>
                         <h1 style="margin-top:5px; font-size: 23px;">Did You know that your kidneys</h1>
@@ -93,7 +101,9 @@
             </ion-row>
 
             <ion-row >
-              <img src="/public/care3.webp"/>
+              <ion-row>
+                <img src="/public/gold/110.png" alt="">
+            </ion-row>
                 <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
                 <ion-text>
                         <h1 style="margin-top:5px; font-size: 23px;">8 Golden Rules</h1>
@@ -108,7 +118,9 @@
             </ion-row>
 
             <ion-row >
-              <img src="/public/care3.webp"/>
+              <ion-row>
+                <img src="/public/nutrition/ENGLISH/127.png" alt="">
+            </ion-row>
                 <ion-col style="display: flex;justify-content: space-between;flex-direction: row;">
                 <ion-text>
                         <h1 style="margin-top:5px; font-size: 23px;">How to read nutrition facts</h1>

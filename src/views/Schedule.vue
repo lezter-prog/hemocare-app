@@ -30,7 +30,7 @@
              
               <ion-col class="ion-justify-content-center">
                 <!-- <ion-button shape="round" size="large"> Records</ion-button> -->
-                <ion-button shape="round" color="light" size="large"  router-link="./blog/post" router-direction="forward">
+                <ion-button shape="round" color="light" size="large"  router-link="/hemo/schedule/list" router-direction="forward">
                     <!-- <ion-icon :icon="listSharp" size="large"></ion-icon> -->
                     Schedule
                   </ion-button>

@@ -16,6 +16,8 @@ import Kidneys from '../views/Kidneys.vue';
 import Golden from '../views/Golden.vue';
 import NutritionFacts from '../views/NutritionFacts.vue';
 import DetectChronicKidneyDisease from '../views/DetectChronicKidneyDisease.vue';
+import ScheduleList from '../views/schedule/ViewSchedule.vue';
+import AddSchedule from '../views/schedule/AddNewSchedule.vue';
 import Admin from '../views/Admin.vue';
 
 
@@ -34,19 +36,19 @@ const routes: Array<RouteRecordRaw> = [
         redirect: '/hemo/fluid'
       },
       {
-        path: 'fluid',
+        path: 'fluid/',
         component: () => import('@/views/FluidMonitoring.vue')
       },
       {
-        path: 'medication',
+        path: 'medication/',
         component: () => import('@/views/Medication.vue')
       },
       {
-        path: 'blog',
+        path: 'blog/',
         component: () => import('@/views/Blog.vue')
       },
       {
-        path: 'schedule',
+        path: 'schedule/',
         component: () => import('@/views/Schedule.vue')
       }
     ]
@@ -85,6 +87,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/hemo/medication/new',
     name: 'newMedecine',
     component: addNewMedecine
+  },
+  {
+    path: '/hemo/schedule/list',
+    name: 'listOFSchedule',
+    component: ScheduleList
+  },
+  {
+    path: '/hemo/schedule/new',
+    name: 'newSchedule',
+    component: AddSchedule
   },
   {
     path: '/hemo/blog/post',
@@ -156,6 +168,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'schedule',
         component: () => import('@/views/AdminSchedule.vue')
+      },
+      {
+        path: 'schedule/view',
+        component: () => import('@/views/AdminViewSchedule.vue')
       },
     ]
   },

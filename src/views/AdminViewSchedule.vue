@@ -18,13 +18,13 @@
             <ion-col class="ion-text-left">{{ name }}</ion-col>
           </ion-row>
           <ion-row >
-            <ion-col >Last 7 days Fluid Intake</ion-col>
+            <ion-col >Schedules</ion-col>
           </ion-row>
         </ion-grid>
         <ion-grid>
           <ion-list>
-              <ion-item v-for="fluid in fluids">
-                <ion-label>{{ fluid.total_fluid_taken_ml+'ML -'+ fluid.date_entry}}</ion-label>
+              <ion-item v-for="sched in filteredSchedules">
+                <ion-label>{{ sched.type+' - '}} {{ moment(sched.schedule[0]).format('MM-DD-YYYY')}} {{sched.schedule.length>1?' to '+sched.schedule.findLast(d=>d):'' }}  <ion-badge slot="end"><ion-label>{{ sched.status == null?"No Status":sched.status }}</ion-label></ion-badge> </ion-label>
               </ion-item>
             </ion-list>
         </ion-grid>
@@ -62,10 +62,11 @@
    import { create, ellipsisHorizontal, stopwatch, water, listSharp, logOut, star } from 'ionicons/icons';
   import { add } from 'ionicons/icons';
   import { useAppWriteAccount } from '../composable/useAppWriteAccount';
-  import { useAppwiteFluid } from '../composable/useAppWriteFluid';
+  import { useAppWriteSchedule } from '../composable/useAppWriteSchedule';
   import { ref,onMounted,watch,defineProps } from 'vue';
   import { Storage } from '@ionic/storage';
   import {useRouter} from "vue-router";
+  import moment from 'moment';
 
 
   const props = defineProps({
@@ -78,19 +79,26 @@
   })
   
   const { accountSession, getAllUsers } =  useAppWriteAccount();
-  const { getLast7DaysById  } =  useAppwiteFluid();
+  const { getAllByUserAllStatus  } =  useAppWriteSchedule();
   const store = new Storage();
   const ionRouter = useIonRouter();
 
   const userid = ref(useRouter().currentRoute.value.query.userId);
   const name = ref(useRouter().currentRoute.value.query.name);
-  const fluids = ref();
+  const schedules = ref();
+  const filteredSchedules= ref();
 
   
   const initialize = async() => {
       showLoading();
-      fluids.value = (await getLast7DaysById(userid.value??'')).data;
-      console.log(fluids.value);
+      schedules.value = (await getAllByUserAllStatus(userid.value??'')).data;
+      setTimeout(()=>{
+        filteredSchedules.value =schedules.value;
+        },3000)
+      
+      console.log(schedules.value);
+
+
       // filteredUsers.value = await InitializeFluidIntakes();
   }
 onMounted(()=>initialize());

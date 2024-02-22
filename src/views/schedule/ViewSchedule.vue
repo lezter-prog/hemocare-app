@@ -12,7 +12,7 @@
       </ion-header>
       <ion-content :fullscreen="true" style="background-color: #9FDBF3;">
         
-        <ion-grid style="height: auto;margin-bottom: 8px;">
+        <!-- <ion-grid style="height: auto;margin-bottom: 8px;">
             <ion-row class="flex-row">
               <ion-col class="fixedColor ion-justify-content-center" style="text-align: left">
                 <ion-card class="section-color1" style="width: 100%;height: 50%;margin:0">
@@ -62,37 +62,32 @@
               </ion-col>
               
             </ion-row>
-        </ion-grid>
+        </ion-grid> -->
         <ion-grid v-if="getAll != undefined">
-            <ion-row v-for="med in getAll" class="">
+            <ion-row v-for="sched in getAll" class="">
               <ion-col  class="scheduledColor ion-justify-content-center" style="text-align: left;margin-bottom: 10px;">
-                <ion-card class="section-color1" style="width: 100%;height: 50%;margin:0;display: flex;flex-direction: column;">
-                    <ion-text style="font-size: larger;">
-                        {{getAllScheduleDesc(med.schedule)}}
+                <ion-card class="section-color1" style="width: 100%;height: 100%;margin:0;display: flex;flex-direction: column;">
+                  <ion-text style="font-size: 25px;">
+                    {{ moment(sched.schedule[0]).format('hh:mm a')}}
+                    </ion-text>  
+                  <ion-text style="font-size: 20px;">
+                        {{sched.type}}
                     </ion-text>
-                    <ion-text>
-                      Times Taken today:{{med.times_taken}}
+                    <ion-text style="font-size: 16px;">
+                     {{ moment(sched.schedule[0]).format('MM-DD-YYYY')}} {{sched.schedule.length>1?'-'+sched.schedule.findLast(d=>d):'' }}
                     </ion-text>
-                    <ion-text>
-                      Last Taken: {{ med.last_datetime_taken }}
-                    </ion-text>
-                </ion-card>
-                <ion-card  class="section-color1" style="width: 100%;height: 44%;margin:2% 0px 0px 0px;display: flex;">
-                   <img :src="getMedecineType(med.medecine_type)" style="width: 20%;height: 100%;" alt="">
-                   <div class="label-medication" style="display: flex;flex-direction: column;">
-                    <ion-text :style="analyzeFontSize(med.name)">
-                        {{  med.name }}
-                    </ion-text>
-                    <ion-text style="font-size: 15px;">
-                       {{ med.volume}}
-                    </ion-text>
+                    <div class="medicationStatus" style="width: 100%;display: flex;flex-direction: row-reverse;align-items: flex-end;">
+                      <ion-button shape="round" size="small" color="danger" @click="deleteSchedule(sched.$id)">remove</ion-button>
+                      <ion-button shape="round" size="small" @click="attend(sched.$id)">Attended</ion-button>
                    </div>
+                </ion-card>
+                <!-- <ion-card  class="section-color1" style="width: 100%;height: 44%;margin:2% 0px 0px 0px;display: flex;">
                    <div class="medicationStatus" style="width: 100%;display: flex;flex-direction: row-reverse;align-items: flex-end;">
-                    <ion-button shape="round" size="small" color="danger" @click="deleteSchedule(med.$id)">remove</ion-button>
-                    <ion-button shape="round" size="small" @click="takeAMedecine(med.$id,med.schedule,med.taken_times??0)">Take</ion-button>
+                      <ion-button shape="round" size="small" color="danger" @click="deleteSchedule(sched.$id)">remove</ion-button>
+                      <ion-button shape="round" size="small" @click="attend(sched.$id)">Take</ion-button>
                    </div>
                    
-                </ion-card>
+                </ion-card> -->
               </ion-col>
               <!-- <ion-col class="scheduledColor ion-justify-content-center" style="text-align: left;margin-top: 10px;">
                 <ion-card class="section-color1" style="width: 100%;height: 50%;margin:0">
@@ -205,15 +200,15 @@
     IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,
     useIonRouter
    } from '@ionic/vue';
-   import { create, ellipsisHorizontal, stopwatch, water, listSharp, logOut, star,home } from 'ionicons/icons';
+   import { create, ellipsisHorizontal, stopwatch, water, listSharp, logOut, star, home } from 'ionicons/icons';
   import { add } from 'ionicons/icons';
   import { Bar } from 'vue-chartjs'
   import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
-  import { useAppWriteMedication } from '../composable/useAppWriteMedecine';
-  import { useAppWriteAccount } from '../composable/useAppWriteAccount';
+  import { useAppWriteSchedule } from '../../composable/useAppWriteSchedule';
+  import { useAppWriteAccount } from '../../composable/useAppWriteAccount';
   import { ref,onMounted, onBeforeMount,watch} from 'vue';
   import moment from 'moment';
-  import { useAppwiteFluid } from '../composable/useAppWriteFluid';
+//   import { useAppwiteFluid } from '../composable/useAppWriteFluid';
 
   const ionInfinite = (ev: InfiniteScrollCustomEvent) => {
        
@@ -222,11 +217,11 @@
   const ionRouter = useIonRouter();
   ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
-  const { checkTodaysEntry, getLast7Days, getValueByDate } = useAppwiteFluid();
+//   const { checkTodaysEntry, getLast7Days, getValueByDate } = useAppwiteFluid();
   
   
   const { accountSession } =  useAppWriteAccount();
-  const { inputMedication, getAllMedecines, takeMedecine, checkBeforeTake, check, deleteMedecine, getTakeCount} = useAppWriteMedication();
+  const { getAllByUser,deleteSched,Attended} = useAppWriteSchedule();
 
   const month = ref(moment(new Date()).format('MMMM'));
   const day = ref(moment(new Date()).format('DD'));
@@ -258,7 +253,7 @@ const options = ref({
 });
 
 onMounted(async()=>{
-  const data =  (await getAllMedecines()).data;
+  const data =  (await getAllByUser()).data;
   setTimeout(()=>{
     getAll.value = data; 
   },2000)
@@ -278,61 +273,6 @@ const addNewMedecine = ()=>{
   ionRouter.navigate('./new', 'forward','replace');
 }
 
-const takeAMedecine =async (id:string,schedule:string,timesTaken:number)=>{
-  const alertButtons = [
-    {
-      text: 'Cancel',
-      role: 'cancel',
-      handler: () => {
-      },
-    },
-    {
-      text: 'OK',
-      role: 'confirm',
-      handler: async () => {
-        var response = await takeMedecine(id,schedule);
-          console.log(response);
-          if(response.data){
-             location.reload();
-          }else{
-            await alert2.present();
-          }
-      },
-    },
-  ];
-  const alert = await alertController.create({
-      header: 'You are going to take this medecine',
-      message: 'you cant revert this action',
-      buttons: alertButtons,
-    });
-    const alert2 = await alertController.create({
-      header: 'You have reach the maximum number of medecine this today',
-      message: '',
-      buttons: ['OK'],
-    });
-  
-
-  
-
-    await alert.present();
-    // if(schedule == "onceADay" && timesTaken >=1){
-    //   await alert2.present();
-    // }else if(schedule == "twiceADay" && timesTaken >=2){
-    //   await alert2.present();
-    // }else if(schedule == "everyFourHours" && timesTaken >=6){
-    //   await alert2.present();
-    // }else if(schedule == "everySixHours" && timesTaken >=4){
-    //   await alert2.present();
-    // }else{
-    //   if(schedule != "" && timesTaken >=1){
-    //     await alert2.present();
-    //   }else{
-    //     await alert.present();
-    //   }
-      
-    // }
-}
-
 const deleteSchedule =async (id:string)=>{
   const alertButtons = [
     {
@@ -345,7 +285,7 @@ const deleteSchedule =async (id:string)=>{
       text: 'Yes',
       role: 'confirm',
       handler: async () => {
-        var response = await deleteMedecine(id);
+        var response = await deleteSched(id);
           console.log(response);
           if(response){
              location.reload();
@@ -355,181 +295,47 @@ const deleteSchedule =async (id:string)=>{
   ];
 
   const alert = await alertController.create({
-      header: 'Are you sure you want to remove thi medecine in you schedule',
+      header: 'Are you sure you want to remove thi schedue ',
       message: 'you are not able revert this action',
       buttons: alertButtons,
-    });
-    const alert2 = await alertController.create({
-      header: 'You have reach the maximum number of medecine this today',
-      message: '',
-      buttons: ['OK'],
     });
     await alert.present();
 }
 
-const checkTimesTaken = async(id:string)=>{
-  var res =  await check(id);
-  var count = res.data?.length;
-  return "Taken "+count+"x last take was";
+const attend = async(id:string) =>{
+  const alertButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+      },
+    },
+    {
+      text: 'Yes',
+      role: 'confirm',
+      handler: async () => {
+        var response = await Attended(id);
+          console.log(response);
+          if(response){
+             location.reload();
+          }
+      },
+    },
+  ];
+
+  const alert = await alertController.create({
+      header: 'You are going to mark this Schedule as Done ',
+      message: 'you are not able revert this action',
+      buttons: alertButtons,
+    });
+    await alert.present();
+
 }
 
-const getTimes =async (id:string) => {
-  var res =  await check(id);
-  var count = res.data?.length;
-  return "Taken "+count+"x last take was";
-}
-
-const getAllScheduleDesc = (schedule:string) =>{
-  var response = "";
-  switch(schedule){
-    case "oneceADay":
-      response ="Once a Day"
-      break;
-    case "twiceADay":
-      response ="Twice a day"
-      break;
-    case "everyFourHours":
-      response ="Every four hours"
-      break;
-    case "everySixHours":
-      response ="Every six hours"
-      break;
-    default:
-      response=schedule;
-      break;
-
-  }
-  return response;
-}
-
-  const buttonActive = async (btn:String) =>{
-
-    if(btn == "today"){
-      todaySectionShow.value=true;
-      yesterdaySectionShow.value=false;
-      sevendaysSectionShow.value=false;
-      todayBtn.value = "btn-active";
-      yesterdayBtn.value = "";
-      sevenDaysAgoBtn.value="";
-    }else if(btn == "yesterday"){
-     
-      todaySectionShow.value=false;
-      yesterdaySectionShow.value=true;
-      sevendaysSectionShow.value=false;
-      // yesterdayFluid.value = getYesterdayValue.value.data?.documents[0].total_fluid_taken_ml;
-      todayBtn.value = "";
-      yesterdayBtn.value = "btn-active";
-      sevenDaysAgoBtn.value="";
-    }else{
-      todaySectionShow.value=false;
-      yesterdaySectionShow.value=false;
-      sevendaysSectionShow.value=true;
-      todayBtn.value = "";
-      yesterdayBtn.value = "";
-      sevenDaysAgoBtn.value="btn-active";
-      // console.log(header.value);
-    }
-
-  }
-
-  const getFormattedDate= (date:string) =>{
-   console.log(date)
-    if(date ==undefined){
-      return "";
-    }
-    var d = new Date(date);
-    return moment(d).format('MM-DD-YYYY hh:ss a');
-    // return "sample"
-  }
-
-  const redirectHome = () =>{
+const redirectHome = () =>{
   ionRouter.replace('/hemo');
 }
-  
-  watch(getAll, async (data, oldData) => {
-    console.log(data);
-    console.log(oldData);
-    if(data !=oldData){
-      console.log("IN")
-      getAll.value =undefined;
-      getAll.value=data;
-    }
-})
 
-const analyzeFontSize = (name:string)=>{
-  
-
-  if(name.length<=10){
-      return {
-        'font-size':'20px'
-      };
-  }else{
-    return {
-        'font-size':'14px'
-      };
-  }
-}
-
-const getMedecineType=(type:string) => {
-    var icon = "";
-    switch(type){
-      case "Syringe":
-        icon =  "/public/medication/44.png";
-        break;
-      case "Pills":
-        icon =  "/public/medication/45.png";
-        break;
-      case "Tablets":
-        icon =  "/public/medication/46.png";
-        break;
-      case "Topical":
-        icon =  "/public/medication/47.png";
-        break;
-      case "Inhaler":
-        icon =  "/public/medication/48.png";
-        break;
-      case "Vitamins":
-        icon =  "/public/medication/49.png";
-        break;
-      case "Herbal":
-        icon =  "/public/medication/50.png";
-        break;
-      case "Syrup":
-        icon =  "/public/medication/51.png";
-        break;
-      case "Drops":
-        icon =  "/public/medication/52.png";
-        break;
-      case "Liquids":
-        icon =  "/public/medication/53.png";
-        break;
-    }
-
-    return icon;
-}
-
-const getCurrentCount =  (id:string) =>{
-    return getTakeCount(id)
-    .then(found=>{
-      const data =  found.data;
-    
-      const med  =  data?.findLast(data=>data);
-      console.log(med);  
-      return med?.times_taken;
-    });
-    
-}
-
-// watch( () => getAll, async (data) => {
-//   console.log(data.value);
-//   if (data.value != undefined) {
-//     getAll.value=data.value;
-//   }
-// },{ deep: true })
-
-// const clickWater = ()=>{
-//   ionRouter.navigate('/hemo/fluid/intake', 'forward', 'replace');
-// }
   </script>
   
   <style>

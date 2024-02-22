@@ -28,7 +28,24 @@
                 <ion-input ref="amountRef" type="text" labelPlacement="floating" label="Choose Amount/Volume of Medication" required></ion-input>
             </ion-item>
             <ion-item>
-                <ion-input ref="medecineTypeRef" type="text" labelPlacement="floating" label="Medecine Type" required></ion-input>
+                <!-- <ion-input ref="medecineTypeRef" type="text" labelPlacement="floating" label="Medecine Type" required></ion-input> -->
+                <ion-select ref="medecineTypeRef" label="Medication Type" interface="popover" aria-required="true">
+                  <ion-select-option value="Syringe">
+                    Syringe
+                  </ion-select-option>
+                  <ion-select-option value="Pills">Pills</ion-select-option>
+                  <ion-select-option value="Tablets">Tablets</ion-select-option>
+                  <ion-select-option value="Topical">Topical</ion-select-option>
+                  <ion-select-option value="Inhaler">Inhaler</ion-select-option>
+                  <ion-select-option value="Vitamins">Vitamins</ion-select-option>
+                  <ion-select-option value="Herbal">Herbal</ion-select-option>
+                  <ion-select-option value="Syrup">Syrup  </ion-select-option>
+                  <ion-select-option value="Drops">Drops</ion-select-option>
+                  <ion-select-option value="Liquids">Liquids</ion-select-option>
+                </ion-select>
+
+               
+
             </ion-item>
             <ion-item-divider>
               <ion-label> Schedule </ion-label>
@@ -44,14 +61,7 @@
                 <ion-radio value="everyFourHours"  @click="checkIfOnceADay('everyFourHours')">Every four hours</ion-radio><br />
                 <ion-radio value="everySixHours"  @click="checkIfOnceADay('everySixHours')"> Every six hours</ion-radio>
               </ion-radio-group>
-                <!-- <ion-checkbox label-placement="stacked" name="SUNDAY" @click="addDayToArray">Sun</ion-checkbox>
-                <ion-checkbox label-placement="stacked" name="MONDAY" @click="addDayToArray">Mon</ion-checkbox>
-                <ion-checkbox label-placement="stacked" name="TUESDAY" @click="addDayToArray">Tue</ion-checkbox>
-                <ion-checkbox label-placement="stacked" name="WEDNESDAY" @click="addDayToArray">Wed</ion-checkbox>
-                <ion-checkbox label-placement="stacked" name="THURSDAY" @click="addDayToArray">Thu</ion-checkbox>
-                <ion-checkbox label-placement="stacked" name="FRIDAY" @click="addDayToArray">Fri</ion-checkbox>
-                <ion-checkbox label-placement="stacked" name="SATURDAY" @click="addDayToArray">Sat</ion-checkbox> -->
-            </ion-item>
+              </ion-item>
               <ion-grid>
                 <ion-row>
                   <ion-col class="ion-justify-content-center">
@@ -83,7 +93,9 @@
      IonRow,
      IonBackButton, IonButtons, alertController,
      IonDatetime,IonDatetimeButton, IonAlert, IonModal,
-     useIonRouter
+     useIonRouter,
+     IonSelect, IonSelectOption,
+     IonIcon
     } from '@ionic/vue';
     import {ref, defineComponent} from 'vue';
     import { Storage } from '@ionic/storage';
@@ -91,6 +103,7 @@
     import { useAppWriteAccount } from '../composable/useAppWriteAccount';
     import  { localNotif } from '../composable/LocalNotification';
     import moment from 'moment';
+    import { create, ellipsisHorizontal, stopwatch, water, listSharp, logOut, star,download } from 'ionicons/icons';
 
     
 
@@ -99,6 +112,7 @@
     const ionRouter = useIonRouter();
     const medecineNameRef = ref();
     const amountRef = ref();
+    const medecineTypeRef = ref();
     const emailRef = ref();
     const arrayDays = new Array();
     const dateTimeRef = ref();
@@ -146,7 +160,8 @@
         const response  = await inputMedication(
           medecineNameRef.value.$el.value,
           amountRef.value.$el.value,
-          scheduleRef.value
+          scheduleRef.value,
+          medecineTypeRef.value.$el.value
         );
         console.log(response);
 

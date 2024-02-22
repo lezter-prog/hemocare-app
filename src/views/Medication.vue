@@ -30,7 +30,7 @@
              
               <ion-col class="ion-justify-content-center">
                 
-                  <ion-button shape="round" color="light" size="large" style="width:200px;" router-link="./medication/list" >
+                  <ion-button shape="round" color="light" size="large" style="width:200px;" router-link="/hemo/medication/list" router-direction="forward" >
                   <!-- <ion-icon :icon="listSharp" size="large"></ion-icon> -->
                  Medication
                 </ion-button>
